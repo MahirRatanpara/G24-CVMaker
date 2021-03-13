@@ -1,0 +1,19 @@
+{
+  "name": "cvmaker",
+  "version": "1.0.0",
+  "description": "CV maker SEN group-24 project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MR-1301/CVMaker.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MR-1301/CVMaker/issues"
+  },
+  "homepage": "https://github.com/MR-1301/CVMaker#readme"
+}
