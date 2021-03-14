@@ -21,7 +21,15 @@ const bcryptjs = require("bcryptjs");
 // jwt related
 const jwt = require("jsonwebtoken");
 
-app.use(morgan("tiny")); // logging framework
+app.use(morgan("tiny")); //logging framework
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+// connecting node.js app with database
+const dbURI = process.env.DBURI;
+console.log(typeof dbURI);
+mongoose
+  .connect(dbURI, { useUnifiedTopology: true, useNewUrlParser: true })
+  .then(() => {
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+  })
+  .catch((err) => console.error({ err }));
