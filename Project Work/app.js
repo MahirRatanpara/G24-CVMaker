@@ -26,7 +26,7 @@ const jwt = require("jsonwebtoken");
 const passport = require("passport");
 require("./config/passport-config.js")(passport);
 
-app.use(morgan("tiny")); //logging framework
+app.use(morgan("dev")); //logging framework
 
 // connecting node.js app with database
 const dbURI = process.env.DBURI;
