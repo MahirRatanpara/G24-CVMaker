@@ -39,6 +39,8 @@ const register_post = (req, res, next) => {
           const newUserInstance = new User({
             username: req.body.username,
             password: req.body.password,
+            securityQuestion: req.body.securityQ,
+            securityAnswer: req.body.securityAns,
           });
           bcryptjs.genSalt(10, (err, salt) => {
             bcryptjs.hash(newUserInstance.password, salt, (err1, hash) => {
@@ -83,4 +85,26 @@ const logout_post = (req, res, next) => {
   });
 };
 
-module.exports = { register_post, login_post, logout_post };
+const security_check = (req, res, next) => {
+  const { securityQ, securityAns } = req.body;
+  console.log({ securityQ, securityAns });
+  const { username, id: userId } = req.user;
+  User.findById(userId)
+    .then((data) => {
+      console.log({ data });
+      if (!data) throw new Error();
+      if (
+        data.securityQuestion === securityQ &&
+        data.securityAnswer === securityAns
+      ) {
+        res.sendStatus(200).json();
+      } else {
+        res.sendStatus(403).json();
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+module.exports = { register_post, login_post, logout_post, security_check };
