@@ -16,6 +16,9 @@ const {
   login_post,
   logout_post,
   security_check,
+  profile_get,
+  profile_post,
+  profile_delete,
 } = require("../controllers/indexControllers");
 
 router.post("/register", register_post);
@@ -28,6 +31,24 @@ router.post(
   "/securityCheck",
   passport.authenticate("jwt", { session: false }),
   security_check
+);
+
+router.get(
+  "/profile",
+  passport.authenticate("jwt", { session: false }),
+  profile_get
+);
+
+router.post(
+  "/profile",
+  passport.authenticate("jwt", { session: false }),
+  profile_post
+);
+
+router.delete(
+  "/profile",
+  passport.authenticate("jwt", { session: false }),
+  profile_delete
 );
 
 module.exports = router;

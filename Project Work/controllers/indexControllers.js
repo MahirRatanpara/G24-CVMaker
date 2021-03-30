@@ -107,4 +107,52 @@ const security_check = (req, res, next) => {
     });
 };
 
-module.exports = { register_post, login_post, logout_post, security_check };
+const profile_get = (req, res, next) => {
+  const { id } = req.user;
+  User.findById(id)
+    .then((data) => {
+      if (!data) throw new Error();
+
+      const objToSend = {
+        username: data.username,
+        isAdmin: data.isAdmin,
+        dateRegistered: data.dateRegistered,
+      };
+      res.json(objToSend);
+    })
+    .catch((err) => console.log(err));
+};
+
+const profile_post = (req, res, next) => {
+  const { id } = req.user;
+  const { isAdmin } = req.body;
+  User.findByIdAndUpdate(id, { isAdmin }, { new: true })
+    .then((data) => {
+      if (!data) res.sendStatus(500).json();
+
+      console.log(data);
+      res.sendStatus(200).json();
+    })
+    .catch((err) => console.log(err));
+};
+
+const profile_delete = (req, res, next) => {
+  const { id } = req.user;
+  User.findByIdAndDelete(id)
+    .then((data) => {
+      if (!data) res.sendStatus(500).json();
+      console.log(data);
+      res.sendStatus(200).json();
+    })
+    .catch((err) => console.log(err));
+};
+
+module.exports = {
+  register_post,
+  login_post,
+  logout_post,
+  security_check,
+  profile_get,
+  profile_post,
+  profile_delete,
+};
