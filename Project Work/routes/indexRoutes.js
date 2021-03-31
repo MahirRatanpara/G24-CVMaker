@@ -8,6 +8,7 @@ dotenv.config({ path: "./.env", encoding: "utf-8" });
 
 // passport related
 const passport = require("passport");
+const { authenticate } = require("../config/authenticate.js");
 
 // controllers
 const {
@@ -21,6 +22,7 @@ const {
   profile_delete,
 } = require("../controllers/indexControllers");
 
+// local authn routes
 router.post("/register", register_post);
 
 router.post("/login", login_post);
@@ -33,22 +35,46 @@ router.post(
   security_check
 );
 
+const checkUserLoggedIn = (req, res, next) => {
+  console.log("checkUserLoggedIn:", req.user);
+  req.user ? next() : res.redirect("/");
+};
+
+// oauth routes
+router.get("/login/auth/google/logout", (req, res, next) => {
+  req.logout();
+  res.redirect("/");
+});
+
 router.get(
-  "/profile",
-  passport.authenticate("jwt", { session: false }),
-  profile_get
+  "/login/auth/google",
+  passport.authenticate("google", {
+    scope: ["profile", "email"],
+  }),
+  (req, res, next) => {
+    next();
+  }
 );
 
-router.post(
-  "/profile",
-  passport.authenticate("jwt", { session: false }),
-  profile_post
+router.get(
+  "/login/auth/google/callback",
+  passport.authenticate("google"),
+  (req, res, next) => {
+    res.json({ msg: "You reached the callback URI" });
+  }
 );
 
-router.delete(
-  "/profile",
-  passport.authenticate("jwt", { session: false }),
-  profile_delete
-);
+// router.get(
+//   "/profile",
+//   checkUserLoggedIn,
+//   passport.authenticate("jwt", { session: false }),
+//   profile_get
+// );
+
+router.get("/profile", authenticate, checkUserLoggedIn, profile_get);
+
+router.post("/profile", authenticate, checkUserLoggedIn, profile_post);
+
+router.delete("/profile", authenticate, checkUserLoggedIn, profile_delete);
 
 module.exports = router;

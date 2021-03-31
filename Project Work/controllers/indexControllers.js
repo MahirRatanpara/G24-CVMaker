@@ -108,15 +108,21 @@ const security_check = (req, res, next) => {
 };
 
 const profile_get = (req, res, next) => {
-  const { id } = req.user;
-  User.findById(id)
+  console.log(req.user);
+  User.findOne({
+    username: req.user?.username || req.user?.emails[0].value.slice(0, -10),
+  })
     .then((data) => {
       if (!data) throw new Error();
-
+      const fallbackImageURL =
+        "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg";
       const objToSend = {
         username: data.username,
         isAdmin: data.isAdmin,
         dateRegistered: data.dateRegistered,
+        photoURL:
+          (req.user && req.user.photos && req.user.photos[0].value) ||
+          fallbackImageURL,
       };
       res.json(objToSend);
     })
