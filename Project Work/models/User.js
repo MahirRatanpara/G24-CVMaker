@@ -4,10 +4,11 @@ const Schema = mongoose.Schema;
 
 const userObj = {
   username: { type: String, require: true },
-  password: { type: String, require: true },
+  googleId: { type: String },
+  password: { type: String },
   isAdmin: { type: Boolean, default: false },
-  securityQuestion: { type: String, default: "", required: true },
-  securityAnswer: { type: String, default: "", required: true },
+  securityQuestion: { type: String, default: "" },
+  securityAnswer: { type: String, default: "" },
   dateRegistered: { type: Date, default: Date.now() },
 };
 

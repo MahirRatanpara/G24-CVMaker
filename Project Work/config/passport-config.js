@@ -2,6 +2,9 @@
 const passportLocal = require("passport-local");
 const LocalStrategy = passportLocal.Strategy;
 
+// passport-oauth related
+const GoogleStrategy = require("passport-google-oauth20");
+
 // passport-jwt related
 const passportJWT = require("passport-jwt");
 const JWTStrategy = passportJWT.Strategy;
@@ -16,6 +19,13 @@ const User = require("../models/User.js");
 // dotenv related
 const dotenv = require("dotenv");
 dotenv.config({ path: "./.env", encoding: "utf-8" });
+
+const oauthStrategyOptions = {
+  // options for google strat.
+  clientID: process.env.GOOGLE_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  callbackURL: "/api/login/auth/google/callback",
+};
 
 function myLocalStrategy(username, password, done) {
   // verify email
@@ -65,6 +75,51 @@ function passportInit(passport) {
       myJWTStrategy
     )
   );
+
+  // mount our oauth strategy
+  passport.use(
+    new GoogleStrategy(
+      oauthStrategyOptions,
+      (request, accessToken, refreshToken, profile, done) => {
+        // passport callback function
+        console.log(profile);
+
+        // check if the user already exists in out db
+        User.findOne({ googleId: profile.id })
+          .then((result) => {
+            // console.log(result);
+            if (result) {
+              // user already exists
+              // console.log("here:", result);
+            } else {
+              //   create a new user from the 'profile' info
+              const newUserInstance = new User({
+                username: profile.emails[0].value.slice(0, -10),
+                googleId: profile.id,
+                isAdmin: false,
+              });
+              newUserInstance
+                .save()
+                .then((result) => {
+                  console.log("new user created:", result);
+                })
+                .catch((err) => console.error(err));
+            }
+          })
+          .catch((err) => console.error(err));
+
+        return done(null, profile);
+      }
+    )
+  );
+
+  passport.serializeUser(function (user, done) {
+    done(null, user);
+  });
+
+  passport.deserializeUser(function (user, done) {
+    done(null, user);
+  });
 }
 // By default, if authentication fails, Passport will respond with a 401 Unauthorized status, and any additional route handlers will not be invoked
 
