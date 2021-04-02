@@ -2,10 +2,10 @@ const jwt = require("jsonwebtoken");
 
 const getCookies = (req) => {
   // We extract the raw cookies from the request headers
-  const rawCookies = req.headers.cookie.split("; ");
+  const rawCookies = req.headers.cookie?.split("; ");
 
   const parsedCookies = {};
-  rawCookies.forEach((rawCookie) => {
+  rawCookies?.forEach((rawCookie) => {
     const parsedCookie = rawCookie.split("=");
     parsedCookies[parsedCookie[0]] = parsedCookie[1];
   });

@@ -40,6 +40,7 @@ router.post(
 
 // oauth routes
 router.get("/login/auth/google/logout", (req, res, next) => {
+  res.clearCookie('token');
   req.logout();
   res.redirect("/");
 });
@@ -58,7 +59,11 @@ router.get(
   "/login/auth/google/callback",
   passport.authenticate("google"),
   (req, res, next) => {
-    res.json({ msg: "You reached the callback URI" });
+    console.log(req.headers?.cookie);
+    const googleCookie = (req.headers.cookie?.split("; ")[1]).split("=")[1];
+    // res.json({ msg: "You reached the callback URI" });
+    res.cookie('token',googleCookie);
+    res.status(200).json({ success: true });
   }
 );
 
