@@ -8,7 +8,10 @@ dotenv.config({ path: "./.env", encoding: "utf-8" });
 
 // passport related
 const passport = require("passport");
-const { authenticate } = require("../config/authenticate.js");
+const {
+  authenticate,
+  checkUserLoggedIn,
+} = require("../config/authenticate.js");
 
 // controllers
 const {
@@ -34,11 +37,6 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   security_check
 );
-
-const checkUserLoggedIn = (req, res, next) => {
-  console.log("checkUserLoggedIn:", req.user);
-  req.user ? next() : res.redirect("/");
-};
 
 // oauth routes
 router.get("/login/auth/google/logout", (req, res, next) => {

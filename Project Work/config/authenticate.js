@@ -29,4 +29,10 @@ const authenticate = (req, res, next) => {
   }
   next();
 };
-module.exports = { authenticate };
+
+const checkUserLoggedIn = (req, res, next) => {
+  console.log("checkUserLoggedIn:", req.user);
+  req.user ? next() : res.redirect("/");
+};
+
+module.exports = { authenticate, checkUserLoggedIn };
