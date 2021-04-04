@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon"  sizes="64x64" href="./Images/checklist.png" >
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/aditya_styles.css" />
+    <title>Dashboard - CVMaker</title>
+  </head>
+  <body>
+    <header>
+      <a href="index.html" class="brand-name">CVMaker</a>
+      <nav>
+        <ul class="nav_links">
+          <li><a href="adminDashboard.html" class="active-page" id = 'admin-dashboard' style="display: none;">Admin Dashboard</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li>
+            <div class="dropdown">
+              <a class="btn dropdown-toggle avatar-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="./Images/panda-head.png" alt="avatar" class="avatar-img" id = "user-image">
+              </a>
+
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#">Change Account</a>
+                <a class="dropdown-item" href="#">Change Password</a>
+                <a class="dropdown-item" href="profile.html">Edit Profile</a>
+                <a class="dropdown-item" href="#" id = "logout-button">Logout</a>
+                
+              </div>
+            </div>
+          </li>
+        </ul>
+        
+      </nav>
+      
+    </header>
+    
+</ Main Section ---->
+
+
+    <div class="container">
+      <div class="row">
+        <div class="col-9  mrg">
+          <h1 class="title-margin">Dashboard</h1>
+        </div>
+        <div class="col-2 create align-items-center mrg">
+          <button class="btn btn-create title-margin" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Create <img src="./Images/plus-outline.svg" alt="" class="crt">
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#choose-template-modal">
+                  <img src="./Images/dropdown-select-template.svg" alt="select-template" class="dropdown-icons"> 
+                  Choose Template 
+                </a>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#upload-template-modal">
+                  <img src="./Images/dropdown-upload.svg" alt="upload-template" class="dropdown-icons"> 
+                  Upload Template
+                </a>
+              </div>
+        </div>
+
+        <div class="modal fade" id="choose-template-modal">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <div class="modal-body">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-12">
+                      <h1 class="modal-title-custom">Choose Template</h1>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-6 align-self-center">
+                      <div class="card modal-card">
+                        <div class="card-image-section">
+                          <img src="./Images/Classic.png" alt="Classic template" class="img-fluid">
+                        </div>
+                        <div class="modal-card-text-info">
+                          <h3 class="modal-card-title">Classic Style</h3>
+                        </div>
+                        <div class="container">
+                          <div class="row">
+                            <div class="col-12 card-action-buttons">
+                              <a href="index.html" class="btn modal-btn-edit" type="submit">Select</a></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-6 align-self-center">
+                      <div class="card modal-card">
+                        <div class="card-image-section">
+                          <img src="./Images/Modern.png" alt="Classic template" class="img-fluid">
+                        </div>
+                        <div class="modal-card-text-info">
+                          <h3 class="modal-card-title">Modern Style</h3>
+                        </div>
+                        <div class="container">
+                          <div class="row">
+                            <div class="col-12 card-action-buttons">
+                              <a href="index.html" class="btn modal-btn-edit" type="submit">Select</a></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+
+
+        <div class="modal fade" id="upload-template-modal">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <div class="modal-body">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-12">
+                      <h1 class="modal-title-custom">Upload Template</h1>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="drag-drop-section">
+                        <img src="./Images/upload-template-modal-svg.svg" alt="icon" class="modal-icon-upload">
+                        <h3 class="drap-drop-text">Drag and Drop </h3>
+                        <h3 class="drap-drop-text">your template here </h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <form>
+                        <div class="form-group upload-popup-window">
+                          <label for="upload-template" class="upload-text">Upload from your local machine</label>
+                          <input type="file" class="form-control-file" id="upload-template">
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+        
+
+        <!-------Cards------->
+
+        <div class="col-4 align-self-center">
+          <div class="card">
+            <div class="card-image-section">
+              <img src="./Images/Classic.png" alt="Classic template" class="img-fluid">
+            </div>
+            <div class="card-text-info">
+              <h3>CV for Backend Eng.</h3>
+              <p class="card-text-info-p">Last Edited - 28/3/21</p>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-6 card-action-buttons">
+                  <button class="btn btn-preview" type="submit">Preview</button>
+                </div>
+                <div class="col-6 card-action-buttons">
+                  <button class="btn btn-edit" type="submit">Edit</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-4 align-self-center">
+          <div class="card">
+            <div class="card-image-section">
+              <img src="./Images/Modern.png" alt="Classic template" class="img-fluid">
+            </div>
+            <div class="card-text-info">
+              <h3>CV for Frontend Eng.</h3>
+              <p class="card-text-info-p">Last Edited - 23/3/21</p>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-6 card-action-buttons">
+                  <button class="btn btn-preview" type="submit">Preview</button>
+                </div>
+                <div class="col-6 card-action-buttons">
+                  <button class="btn btn-edit" type="submit">Edit</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-4 align-self-center">
+          <div class="card">
+            <div class="card-image-section">
+              <img src="./Images/Classic 1.png" alt="Classic template" class="img-fluid">
+            </div>
+            <div class="card-text-info">
+              <h3>CV for DevOps Profile</h3>
+              <p class="card-text-info-p">Last Edited - 1/4/21</p>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-6 card-action-buttons">
+                  <button class="btn btn-preview" type="submit">Preview</button>
+                </div>
+                <div class="col-6 card-action-buttons">
+                  <button class="btn btn-edit" type="submit">Edit</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+
+  <script>
+
+  const logoutButton = document.getElementById("logout-button");
+  
+  const token = localStorage.getItem("token")
+  ? localStorage.getItem("token")
+  : "";
+
+  const bearer = "BEARER " + token;
+  let isUserLoggedIn = false;
+  let isFromGoogle = false;
+  if(token) isUserLoggedIn = true;
+  // console.log(document.cookie);
+  const myInit = {
+  method: "GET",
+  withCredentials: true,
+  credentials: 'include',
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: bearer,
+    cookie: document.cookie
+  },
+  mode: "cors",
+  cache: "default",
+  };  
+
+  fetch("https://g24-cvmake-backend.herokuapp.com/api/profile", myInit)
+    .then((res) => {
+        // console.log(res);
+        if (!res.ok) {
+            throw Error("Could not fetch data for that resource");
+        } else {
+            return res.json();
+        }
+    })
+    .then((jsonRes)=>{
+        console.log({jsonRes});
+        if(!jsonRes.username)
+        {
+          window.location.href = "login.html";
+        }
+        else
+        {
+          isUserLoggedIn = true;
+          
+          if(jsonRes.isAdmin)
+          {
+            document.getElementById("admin-dashboard").style.display = "inline";
+          }
+          if(jsonRes.googleId) isFromGoogle = true;
+          document.getElementById("user-image").src = jsonRes.photoURL;
+
+        }
+        
+    })
+    .catch((err)=>{
+      console.log(err);
+      // 
+    });
+
+  // implementing logout API call
+  logoutButton.addEventListener("click",(e)=>{
+    myInit.method = "GET";
+    let url = "https://g24-cvmake-backend.herokuapp.com/api/" + (isFromGoogle ? "login/auth/google/" : "") + "logout";
+    fetch(url,myInit)
+    .then(res=>{
+        if (!res.ok) {
+        throw Error("Could not fetch data for that resource");
+        } else {
+            return res.json();
+        }
+    })
+    .then((jsonRes)=>{
+        console.log({jsonRes});
+        localStorage.removeItem("token");
+        window.location.href = "index.html";
+    })
+    .catch((err)=>console.log(err));
+
+  });
+
+
+  </script>
+
+</html>
