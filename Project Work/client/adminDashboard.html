@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link href="assets/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/adminDashboard.css" />
+    <link rel="stylesheet" href="./css/aditya_styles.css" />
+    <link rel="icon" sizes="64x64" href="./Images/checklist.png" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <header>
+      <a href="index.html" class="brand-name">CVMaker</a>
+      <nav>
+        <ul class="nav_links">
+          <li><a href="dashboard.html" class="active-page">Dashboard</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li>
+            <div class="dropdown">
+              <a
+                class="btn dropdown-toggle avatar-btn"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+                id="MyProfile"
+              >
+                <img
+                  src="./Images/panda-head.png"
+                  alt="avatar"
+                  class="avatar-img"
+                />
+              </a>
+
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#">Change Account</a>
+                <a class="dropdown-item" href="#">Change Password</a>
+                <a class="dropdown-item" href="profile.html">Edit Profile</a>
+                <a class="dropdown-item" href="#" id="logout-button">Logout</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <!-- <nav class="nav-css">
+      <a class="brand-name" href="index.html">CV Maker</a>
+      <button id ="MyProfile" class="btn admin avatar-btn my-1" >
+        <img width="40px" height="40px" class="avatar-img" alt="">
+      </button>
+    </nav  > -->
+
+    <p class="heading">Dashboard</p>
+    <div>
+      <input
+        type="text"
+        class="search-css"
+        aria-label="Search"
+        id="userSearch"
+        placeholder="Search "
+      />
+      <div
+        id="feedTable"
+        style="
+          width: 1152px;
+          height: 55px;
+          left: 144px;
+          top: 350px;
+          background: rgba(219, 219, 221, 0.1);
+          border-radius: 7px;
+          position: absolute;
+        "
+      ></div>
+    </div>
+    <div class="Traffic">
+      <button
+        type="button"
+        class="traffic-css btn btn-outline-primary"
+        onclick="location.href='Traffic.html'"
+      >
+        Traffic
+      </button>
+    </div>
+    <script src="./js/adminDashboard.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
