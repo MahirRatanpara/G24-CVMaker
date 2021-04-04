@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon"  sizes="64x64" href="./Images/checklist.png" >
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/aditya_styles.css" />
+    <title>Profile - CVMaker</title>
+  </head>
+  <body>
+    <header>
+      <a href="index.html" class="brand-name">CVMaker</a>
+      <nav>
+        <ul class="nav_links">
+          <li><a href="dashboard.html" class="">Dashboard</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li>
+            <div class="dropdown">
+              <a class="btn dropdown-toggle avatar-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="./Images/panda-head.png" alt="avatar" class="avatar-img">
+              </a>
+
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#">Change Account</a>
+                <a class="dropdown-item" href="#">Change Password</a>
+                <a class="dropdown-item" href="#">Edit Profile</a>
+                <a class="dropdown-item" href="#" id = "logout-button">Logout</a>
+                
+              </div>
+            </div>
+          </li>
+        </ul>
+        
+      </nav>
+      
+    </header>
+    
+</ Main Section ---->
+
+
+    <div class="container">
+      <div class="row">
+        <div class="col-9  mrg">
+          <h1 class="title-margin">Profile</h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="container new-profile-section">
+      <div class="row">
+        <div class="col-2 offset-3">
+          <img src="./Images/panda-head.png" alt="profile-picture" id="profile-page-pic">
+          <button class="btn pic-edit-btn"><img src="./Images/Profile-pic-edit.svg" alt=""></button>
+        </div>
+        <div class="col-6 profile-name-section">
+          <div class="admin-badge" >
+            <p class="admin-badge-text"><img src="./Images/star-icon.png" alt="star-icon" class="admin-badge-icon">Admin</p>
+          </div>
+          
+          <input type="text" readonly class="form-control-plaintext readonly-h1" id="Profile-name" value="" style="font-size: 50px;" >
+
+          <div class="col-1 offset-1 ">
+                <button class="btn edit-buttons" id="edit-fullname">Edit</button>
+          </div>
+
+          <p class="reg-date"></p>
+          
+        </div>
+
+
+        <div div class="col-8 offset-2 edit-info-panel">
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="col-10 align-self-start">
+                <p>Username</p>
+                <input type="text" readonly class="form-control-plaintext readonly-h1" id="staticName" value="Aditya Padhiar">
+              </div>
+              <!-- <div class="col-1 offset-1 ">
+                <button class="btn edit-buttons" id="edit-username">Edit</button>
+              </div> -->
+            </div>
+            <div class="row align-items-center">
+              <div class="col-10">
+                <p>Gender</p>
+                <input type="text" readonly class="form-control-plaintext readonly-h1" id="staticGender" value="Male">
+                </input>
+              </div>
+              <div class="col-1 offset-1 ">
+                <button class="btn edit-buttons" id="edit-gender">Edit</button>
+              </div>
+            </div>
+          </div>
+        </div> 
+
+
+        <div div class="col-8 offset-2 delete-info-panel">
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="col-12 align-self-start">
+                <p class="delete-acc-text">Delete your Account</p>
+                
+              </div>
+              <div class="col-12">
+                <button class="btn delete-buttons" id="delete-button">Delete Account</button>
+              </div>
+            </div>
+            
+          </div>
+        </div> 
+
+       </div> 
+      </div>
+    </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="./js/profile.js"></script>
+
+  </body>
+</html>
