@@ -4,20 +4,7 @@
   ],
   "imageSize": 100,
   "commit": false,
-  "contributors": [
-    {
-      "login": "MR-1301",
-      "name": "MR-1301",
-      "avatar_url": "https://avatars.githubusercontent.com/u/47418844?v=4",
-      "profile": "https://github.com/MR-1301",
-      "contributions": [
-        "code",
-        "infra",
-        "maintenance",
-        "projectManagement"
-      ]
-    }
-  ],
+  "contributors": [],
   "contributorsPerLine": 7,
   "projectName": "G24-CVMaker",
   "projectOwner": "MR-1301",
