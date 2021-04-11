@@ -1,5 +1,7 @@
 {
-  "files": ["README.md"],
+  "files": [
+    "README.md"
+  ],
   "imageSize": 100,
   "contributorsPerLine": 7,
   "contributorsSortAlphabetically": false,
@@ -12,8 +14,23 @@
       "link": "[<%= symbol %>](<%= url %> \"<%= description %>\"),"
     }
   },
-  "skipCi": "true",
+  "skipCi": true,
   "contributors": [
-      
-  ]
+    {
+      "login": "MR-1301",
+      "name": "MR-1301",
+      "avatar_url": "https://avatars.githubusercontent.com/u/47418844?v=4",
+      "profile": "https://github.com/MR-1301",
+      "contributions": [
+        "code",
+        "infra",
+        "maintenance",
+        "projectManagement"
+      ]
+    }
+  ],
+  "projectName": "G24-CVMaker",
+  "projectOwner": "MR-1301",
+  "repoType": "github",
+  "repoHost": "https://github.com"
 }
