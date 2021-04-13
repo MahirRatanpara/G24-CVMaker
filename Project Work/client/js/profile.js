@@ -19,38 +19,35 @@ const myInit = {
   cache: "default",
 };
 
-const url = "https://g24-cvmake-backend.herokuapp.com/api/profile";
+const url = "/api/profile";
 fetch(url, myInit)
   .then((res) => {
     // console.log(res);
-    if (!res.ok) {
-      throw Error("Could not fetch data for that resource");
-    } else {
-      return res.json();
-    }
+    if (!res.ok) throw new Error("Fauled to fetch resources");
+    return res.json();
   })
   .then((jsonRes) => {
     console.log({ jsonRes });
-    if (!jsonRes.username) {
+    if (!jsonRes.success) {
       window.location.href = "login.html";
     }
 
     registrationDate.innerText =
-      "Registered on : " + jsonRes.dateRegistered.slice(0, 10);
+      "Registered on : " + jsonRes.data.user.dateRegistered.slice(0, 10);
 
-    profilePic.src = jsonRes.photoURL;
-    navbarPic.src = jsonRes.photoURL;
-    usernameFormField.value = jsonRes.username;
-    genderFormField.value = jsonRes.gender;
+    profilePic.src = jsonRes.data.user.photoURL;
+    navbarPic.src = jsonRes.data.user.photoURL;
+    usernameFormField.value = jsonRes.data.user.username;
+    genderFormField.value = jsonRes.data.user.gender;
     if (jsonRes.googleId) isFromGoogle = true;
-    profileName.value = jsonRes.full_name || "";
+    profileName.value = jsonRes.data.user.full_name || "";
 
-    if (!jsonRes.isAdmin) {
+    if (!jsonRes.data.user.isAdmin) {
       adminBadge.style.display = "none";
     }
 
-    console.log(jsonRes);
-    console.log(jsonRes.photoURL);
+    console.log(jsonRes.data.user);
+    console.log(jsonRes.data.user.photoURL);
   })
   .catch((err) => {
     console.log({ err });
@@ -80,7 +77,7 @@ fullname.addEventListener("click", (e) => {
     myInit.method = "POST";
     myInit.body = JSON.stringify({ full_name: profileName.value });
     console.log(myInit.body);
-    fetch("https://g24-cvmake-backend.herokuapp.com/api/profile", myInit)
+    fetch("/api/profile", myInit)
       .then((res) => {
         console.log(res);
         if (!res.ok) {
@@ -113,7 +110,7 @@ gender.addEventListener("click", (e) => {
   } else {
     myInit.method = "POST";
     myInit.body = JSON.stringify({ gender: genderFormField.value });
-    fetch("https://g24-cvmake-backend.herokuapp.com/api/profile", myInit)
+    fetch("/api/profile", myInit)
       .then((res) => {
         console.log("here");
         console.log(res);
@@ -139,10 +136,7 @@ gender.addEventListener("click", (e) => {
 // implementing logout API call
 logoutButton.addEventListener("click", (e) => {
   myInit.method = "GET";
-  let url =
-    "https://g24-cvmake-backend.herokuapp.com/api/" +
-    (isFromGoogle ? "login/auth/google/" : "") +
-    "logout";
+  let url = "/api/" + (isFromGoogle ? "login/auth/google/" : "") + "logout";
   fetch(url, myInit)
     .then((res) => {
       if (!res.ok) {
@@ -162,7 +156,7 @@ logoutButton.addEventListener("click", (e) => {
 // delete user
 deleteButton.addEventListener("click", (e) => {
   myInit.method = "DELETE";
-  fetch("https://g24-cvmake-backend.herokuapp.com/api/profile", myInit)
+  fetch("/api/profile", myInit)
     .then((res) => {
       if (!res.ok) {
         throw Error("Could not fetch data for that resource");
