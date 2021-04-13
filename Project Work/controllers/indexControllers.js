@@ -114,27 +114,6 @@ const logout_get = (req, res, next) => {
   });
 };
 
-const security_check = (req, res, next) => {
-  const { securityQ, securityAns } = req.body;
-
-  const { username, id: userId } = req.user;
-  User.findById(userId)
-    .then((data) => {
-      if (!data) throw new Error();
-      if (
-        data.securityQuestion === securityQ &&
-        data.securityAnswer === securityAns
-      ) {
-        res.sendStatus(200).json();
-      } else {
-        res.sendStatus(403).json();
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-
 const profile_get = (req, res, next) => {
   console.log("here: ", req.user);
   User.findOne({
@@ -221,7 +200,6 @@ module.exports = {
   register_post,
   login_post,
   logout_get,
-  security_check,
   profile_get,
   profile_post,
   profile_delete,
