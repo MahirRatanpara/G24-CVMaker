@@ -30,9 +30,26 @@ require("./config/passport-config.js")(passport);
 
 app.use(morgan("dev")); //logging framework
 
-// enable all cors requests
-app.use(cors());
+const corsOptions = {
+  // origin: "https://g24-cvmaker-frontend.vercel.app",
+  credentials: true,
+};
 
+// enable all cors requests
+app.use(cors(corsOptions));
+app.use("*", function (req, res, next) {
+  //replace localhost:8080 to the ip address:port of your server
+  // res.header(
+  //   "Access-Control-Allow-Origin",
+  //   "https://g24-cvmaker-frontend.vercel.app"
+  // );
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  res.header("Access-Control-Allow-Credentials", true);
+  console.log(req.headers);
+  next();
+});
+app.options("*", cors()); // include before other routes
 // connecting node.js app with database
 const dbURI = process.env.DBURI;
 mongoose
@@ -48,7 +65,6 @@ app.use(
     secret: process.env.SECRET,
     saveUninitialized: true,
     resave: true,
-    maxAge: 24 * 60 * 60,
   })
 );
 
@@ -60,6 +76,7 @@ app.use(express.json());
 
 app.use("/api", indexRoutes);
 app.use("/api/users", adminRoutes);
+app.use(express.static("client"));
 
 app.get("/", (req, res, next) => {
   res.json("hello there");

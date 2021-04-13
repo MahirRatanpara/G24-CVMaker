@@ -24,7 +24,9 @@ const oauthStrategyOptions = {
   // options for google strat.
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: "/api/login/auth/google/callback",
+  callbackURL:
+    "https://g24-cvmaker-preview.herokuapp.com/api/login/auth/google/callback",
+  // "/api/login/auth/google/callback",
 };
 
 function myLocalStrategy(username, password, done) {
@@ -82,7 +84,7 @@ function passportInit(passport) {
       oauthStrategyOptions,
       (request, accessToken, refreshToken, profile, done) => {
         // passport callback function
-        console.log(profile);
+        // console.log(profile);
 
         // check if the user already exists in out db
         User.findOne({ googleId: profile.id })
@@ -97,11 +99,12 @@ function passportInit(passport) {
                 username: profile.emails[0].value.slice(0, -10),
                 googleId: profile.id,
                 isAdmin: false,
+                full_name: profile.displayName,
               });
               newUserInstance
                 .save()
                 .then((result) => {
-                  console.log("new user created:", result);
+                  // console.log("new user created:", result);
                 })
                 .catch((err) => console.error(err));
             }

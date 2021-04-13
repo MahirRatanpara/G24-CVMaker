@@ -18,7 +18,7 @@ const {
   index_get,
   register_post,
   login_post,
-  logout_post,
+  logout_get,
   security_check,
   profile_get,
   profile_post,
@@ -30,7 +30,7 @@ router.post("/register", register_post);
 
 router.post("/login", login_post);
 
-router.post("/logout", logout_post);
+router.get("/logout", logout_get);
 
 router.post(
   "/securityCheck",
@@ -40,9 +40,12 @@ router.post(
 
 // oauth routes
 router.get("/login/auth/google/logout", (req, res, next) => {
-  res.clearCookie('token');
   req.logout();
-  res.redirect("/");
+  res.json({
+    success: true,
+    data: {},
+    error: null,
+  });
 });
 
 router.get(
@@ -59,20 +62,9 @@ router.get(
   "/login/auth/google/callback",
   passport.authenticate("google"),
   (req, res, next) => {
-    console.log(req.headers?.cookie);
-    const googleCookie = (req.headers.cookie?.split("; ")[1]).split("=")[1];
-    // res.json({ msg: "You reached the callback URI" });
-    res.cookie('token',googleCookie);
-    res.status(200).json({ success: true });
+    res.redirect("/dashboard.html");
   }
 );
-
-// router.get(
-//   "/profile",
-//   checkUserLoggedIn,
-//   passport.authenticate("jwt", { session: false }),
-//   profile_get
-// );
 
 router.get("/profile", authenticate, checkUserLoggedIn, profile_get);
 
