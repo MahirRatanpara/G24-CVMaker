@@ -1,6 +1,6 @@
 # SEN(IT314) Course Project G-24
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Project: CVMaker
@@ -25,6 +25,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/ketul08"><img src="https://avatars.githubusercontent.com/u/45821354?v=4?s=100" width="100px;" alt=""/><br /><sub><b>ketul08</b></sub></a><br /><a href="https://github.com/MR-1301/G24-CVMaker/commits?author=ketul08" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/smit1682"><img src="https://avatars.githubusercontent.com/u/60710082?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Smit Prajapati</b></sub></a><br /><a href="https://github.com/MR-1301/G24-CVMaker/commits?author=smit1682" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/341himanshu"><img src="https://avatars.githubusercontent.com/u/78425887?v=4?s=100" width="100px;" alt=""/><br /><sub><b>341himanshu</b></sub></a><br /><a href="https://github.com/MR-1301/G24-CVMaker/commits?author=341himanshu" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/ujp2020"><img src="https://avatars.githubusercontent.com/u/77826082?v=4?s=100" width="100px;" alt=""/><br /><sub><b>ujp2020</b></sub></a><br /><a href="https://github.com/MR-1301/G24-CVMaker/commits?author=ujp2020" title="Code">💻</a></td>
   </tr>
 </table>
 
