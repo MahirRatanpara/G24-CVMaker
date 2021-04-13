@@ -30,17 +30,28 @@ const register_post = (req, res, next) => {
     .then((result) => {
       if (result.length > 0) {
         errors.push("The username is taken");
-        res.json(JSON.stringify(errors));
+        res.json({
+          sucess: false,
+          data: null,
+          error: errors,
+        });
       } else {
         if (errors.length > 0) {
-          res.json(JSON.stringify(errors));
+          res.json({
+            sucess: false,
+            data: null,
+            error: errors,
+          });
         } else {
           // creating a new user instance
           const newUserInstance = new User({
             username: req.body.username,
             password: req.body.password,
+            gender: req.body.gender,
+            full_name: req.body.full_name,
             securityQuestion: req.body.securityQ,
             securityAnswer: req.body.securityAns,
+            isAdmin: false,
           });
           bcryptjs.genSalt(10, (err, salt) => {
             bcryptjs.hash(newUserInstance.password, salt, (err1, hash) => {
@@ -49,7 +60,14 @@ const register_post = (req, res, next) => {
               newUserInstance
                 .save()
                 .then((result) => {
-                  res.json({ msg: "You are successfully registered" });
+                  res.json({
+                    success: true,
+                    data: {
+                      msg: "You are successfully registered",
+                      redirect: "dashboard.html",
+                    },
+                    error: null,
+                  });
                 })
                 .catch((err2) => console.error(err2));
             });
@@ -64,8 +82,9 @@ const login_post = (req, res, next) => {
   // check is the username is registered or not?
 
   passport.authenticate("local", { session: false }, (err, user, info) => {
-    if (err) return res.send(err);
-    if (!user) return res.sendStatus(401);
+    console.log({ err, user });
+    if (err) return res.json(err);
+    if (!user) return res.sendStatus(401).json();
 
     // Making a jwt token signed with user information
     const accessToken = jwt.sign(
@@ -73,25 +92,34 @@ const login_post = (req, res, next) => {
       process.env.ACCESS_TOKEN_SECRET
     );
 
-    res.json({ accessToken });
+    res.json({
+      success: true,
+      data: {
+        accessToken,
+      },
+      error: null,
+    });
   })(req, res, next);
 };
 
-const logout_post = (req, res, next) => {
+const logout_get = (req, res, next) => {
   // user must be already logged in(option to logout only available if the user is logged in-ensured at frontend)
   res.json({
-    msg: "You are logged out",
-    redirect: "/",
+    success: true,
+    data: {
+      msg: "You are logged out",
+      redirect: "/",
+    },
+    error: null,
   });
 };
 
 const security_check = (req, res, next) => {
   const { securityQ, securityAns } = req.body;
-  console.log({ securityQ, securityAns });
+
   const { username, id: userId } = req.user;
   User.findById(userId)
     .then((data) => {
-      console.log({ data });
       if (!data) throw new Error();
       if (
         data.securityQuestion === securityQ &&
@@ -108,11 +136,12 @@ const security_check = (req, res, next) => {
 };
 
 const profile_get = (req, res, next) => {
-  console.log(req.user);
+  console.log("here: ", req.user);
   User.findOne({
     username: req.user?.username || req.user?.emails[0].value.slice(0, -10),
   })
     .then((data) => {
+      console.log({ data });
       if (!data) throw new Error();
       const fallbackImageURL =
         "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg";
@@ -123,21 +152,46 @@ const profile_get = (req, res, next) => {
         photoURL:
           (req.user && req.user.photos && req.user.photos[0].value) ||
           fallbackImageURL,
+        gender: data.gender,
+        full_name: data.full_name,
+        googleId: data.googleId,
       };
-      res.json(objToSend);
+      console.log({ objToSend });
+      res.json({
+        success: true,
+        data: {
+          user: objToSend,
+        },
+        error: null,
+      });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500).json();
+    });
 };
 
 const profile_post = (req, res, next) => {
-  const { id } = req.user;
-  const { isAdmin } = req.body;
-  User.findByIdAndUpdate(id, { isAdmin }, { new: true })
+  User.findOneAndUpdate(
+    { username: req.user?.username || req.user?.emails[0].value.slice(0, -10) },
+    { ...req.body },
+    { new: true }
+  )
     .then((data) => {
-      if (!data) res.sendStatus(500).json();
+      if (!data)
+        res.json({
+          sucess: false,
+          data: null,
+          error: {
+            msg: "User doesn't exist",
+          },
+        });
 
-      console.log(data);
-      res.sendStatus(200).json();
+      res.json({
+        success: true,
+        data: {},
+        error: null,
+      });
     })
     .catch((err) => console.log(err));
 };
@@ -146,9 +200,19 @@ const profile_delete = (req, res, next) => {
   const { id } = req.user;
   User.findByIdAndDelete(id)
     .then((data) => {
-      if (!data) res.sendStatus(500).json();
-      console.log(data);
-      res.sendStatus(200).json();
+      if (!data)
+        res.json({
+          sucess: false,
+          data: null,
+          error: {
+            msg: "User doesn't exist",
+          },
+        });
+      res.json({
+        success: true,
+        data: {},
+        error: null,
+      });
     })
     .catch((err) => console.log(err));
 };
@@ -156,7 +220,7 @@ const profile_delete = (req, res, next) => {
 module.exports = {
   register_post,
   login_post,
-  logout_post,
+  logout_get,
   security_check,
   profile_get,
   profile_post,
