@@ -21,6 +21,18 @@
         "maintenance",
         "projectManagement"
       ]
+    },
+    {
+      "login": "Harsh-Modi278",
+      "name": "Harsh Modi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/47827427?v=4",
+      "profile": "https://github.com/Harsh-Modi278",
+      "contributions": [
+        "code",
+        "infra",
+        "maintenance",
+        "projectManagement"
+      ]
     }
   ],
   "contributorsPerLine": 7

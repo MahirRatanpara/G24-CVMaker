@@ -1,6 +1,6 @@
 # SEN(IT314) Course Project G-24
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Project: CVMaker
@@ -19,6 +19,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://github.com/MR-1301"><img src="https://avatars.githubusercontent.com/u/47418844?v=4?s=100" width="100px;" alt=""/><br /><sub><b>MR-1301</b></sub></a><br /><a href="https://github.com/MR-1301/G24-CVMaker/commits?author=MR-1301" title="Code">💻</a> <a href="#infra-MR-1301" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#maintenance-MR-1301" title="Maintenance">🚧</a> <a href="#projectManagement-MR-1301" title="Project Management">📆</a></td>
+    <td align="center"><a href="https://github.com/Harsh-Modi278"><img src="https://avatars.githubusercontent.com/u/47827427?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Harsh Modi</b></sub></a><br /><a href="https://github.com/MR-1301/G24-CVMaker/commits?author=Harsh-Modi278" title="Code">💻</a> <a href="#infra-Harsh-Modi278" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#maintenance-Harsh-Modi278" title="Maintenance">🚧</a> <a href="#projectManagement-Harsh-Modi278" title="Project Management">📆</a></td>
   </tr>
 </table>
 
