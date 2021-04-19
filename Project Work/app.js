@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const indexRoutes = require("./routes/indexRoutes.js");
 const adminRoutes = require("./routes/adminRoutes.js");
+const resumeRoutes = require("./routes/resumeRoutes");
 const session = require("express-session");
 
 const path = require("path");
@@ -76,6 +77,7 @@ app.use(express.json());
 
 app.use("/api", indexRoutes);
 app.use("/api/users", adminRoutes);
+app.use("/api/resumeData/", resumeRoutes);
 app.use(express.static("client"));
 
 app.get("/", (req, res, next) => {
