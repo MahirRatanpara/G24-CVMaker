@@ -37,9 +37,12 @@ const resumeObj = {
   others: { type: Array, default: [] },
   templateType: { type: Number, default: 0 },
   user: { type: Schema.Types.ObjectId, ref: "User" },
+
+  created: { type: String, default: "" },
+  updated: { type: String, default: "" },
 };
 
-const resumeSchema = new Schema(resumeObj, { timestamps: true });
+const resumeSchema = new Schema(resumeObj);
 const Resume = mongoose.model("Resume", resumeSchema);
 
 module.exports = Resume;

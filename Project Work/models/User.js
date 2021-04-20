@@ -13,9 +13,10 @@ const userObj = {
   securityAnswer: { type: String, default: "" },
   dateRegistered: { type: Date, default: Date.now() },
   resumes: [{ type: Schema.Types.ObjectId, ref: "Resume" }],
+  created: { type: String, default: "" },
 };
 
-const userSchema = new Schema(userObj, { timestamps: true });
+const userSchema = new Schema(userObj);
 const User = mongoose.model("user", userSchema);
 
 module.exports = User;
