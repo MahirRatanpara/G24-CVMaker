@@ -14,6 +14,15 @@ const jwt = require("jsonwebtoken");
 // passport related
 const passport = require("passport");
 
+const giveCurrentDate = () => {
+  const today = new Date();
+  const dd = String(today.getDate()).padStart(2, "0");
+  const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+  const yyyy = today.getFullYear();
+
+  return yyyy + "-" + mm + "-" + dd;
+};
+
 const register_post = (req, res, next) => {
   // check if the user with same username already exists
   // if no then send success message and add user to db else send failure message
@@ -52,6 +61,7 @@ const register_post = (req, res, next) => {
             securityQuestion: req.body.securityQ,
             securityAnswer: req.body.securityAns,
             isAdmin: false,
+            created: giveCurrentDate(),
           });
           bcryptjs.genSalt(10, (err, salt) => {
             bcryptjs.hash(newUserInstance.password, salt, (err1, hash) => {

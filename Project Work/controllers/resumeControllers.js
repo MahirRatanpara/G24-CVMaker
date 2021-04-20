@@ -14,6 +14,15 @@ const jwt = require("jsonwebtoken");
 // passport related
 const passport = require("passport");
 
+const giveCurrentDate = () => {
+  const today = new Date();
+  const dd = String(today.getDate()).padStart(2, "0");
+  const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+  const yyyy = today.getFullYear();
+
+  return yyyy + "-" + mm + "-" + dd;
+};
+
 const get_resume = (req, res, next) => {
   const { resumeID } = req.params;
   Resume.findById(resumeID)
@@ -65,6 +74,8 @@ const new_resume = async (req, res, next) => {
     achievements: obj1?.achievements || [],
     templateType: obj1?.templateType || 0,
     others: otherObj,
+    created: giveCurrentDate(),
+    updated: giveCurrentDate(),
   });
   newResumeInstance.user = mongoose.Types.ObjectId(req.user.id);
   const currUser = await User.findById(req.user.id);
@@ -124,6 +135,7 @@ const edit_resume = async (req, res, next) => {
         achievements: obj1?.achievements || [],
         templateType: obj1?.templateType || 0,
         others: otherObj,
+        updated: giveCurrentDate(),
       },
       { new: true }
     );
