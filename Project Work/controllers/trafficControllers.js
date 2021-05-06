@@ -57,7 +57,7 @@ const traffic_get = async (req, res, next) => {
       //finding new users registered within last 30 days(inclusive)
       let dt = new Date();
       let dt1 = new Date();
-      dt1.setDate(dt1.getDate() - 30);
+      dt1.setDate(dt1.getDate() - 7);
 
       const datesArray = getDaysArray(dt1, dt);
 
