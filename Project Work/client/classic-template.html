@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" sizes="64x64" href="./Images/checklist.png" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./css/classic-template.css" />
+    <title>Classic Template - CVMaker</title>
+  </head>
+  <body>
+    <div id="nanobar">
+      <div class="nanobar"></div>
+    </div>
+    <header>
+      <div class="fixed-position">
+        <a href="index.html" class="brand-name">CVMaker</a>
+        <nav>
+          <ul class="nav_links">
+            <li>
+              <a
+                href="adminDashboard.html"
+                class="active-page"
+                id="admin-dashboard"
+                style="display: none"
+                >Admin Dashboard</a
+              >
+            </li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li>
+              <div class="dropdown">
+                <a
+                  class="btn dropdown-toggle avatar-btn"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <img
+                    src="./Images/panda-head.png"
+                    alt="avatar"
+                    class="avatar-img"
+                    id="user-image"
+                  />
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" href="#">Change Account</a>
+                  <a class="dropdown-item" href="#">Change Password</a>
+                  <a class="dropdown-item" href="profile.html">Edit Profile</a>
+                  <a class="dropdown-item" href="#" id="logout-button"
+                    >Logout</a
+                  >
+                </div>
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!--Main Section-->
+    <div class="colored-bg">
+      <div class="container">
+        <div class="action-panel">
+          <button class="action-panel-btn" id="save-cv">Save</button>
+          <button
+            class="action-panel-btn"
+            id="preview-doc"
+            onclick="previewResume()"
+          >
+            Preview
+          </button>
+          <button class="action-panel-btn" onclick="printResume()">
+            Download
+          </button>
+        </div>
+      </div>
+
+      <!-- success/error message -->
+      <div id = "alert-message" style="display: none;">
+          
+      </div>
+
+      <div id = "alert-message-warn" style="display: none;">
+            
+      </div>
+
+      <!-- CV form -->
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div
+              id="resume"
+              class="container my-resume-page"
+              style="padding: 5%"
+            >
+              <div
+                id="page-approx-message"
+                class="page-approximation invisible"
+              >
+                <p class="text-position">Page 1 ends here &nbsp; ></p>
+              </div>
+
+              <div id="resume-page-1" class="row">
+                <div class="col-md-12">
+                  <table class="main">
+                    <tr>
+                      <td id="logo" class="w-30">
+                        <img src="./Images/DA-IICT-emblem.png" width="220px" />
+                      </td>
+                      <td class="intro w-70">
+                        <h1
+                          id="stud-name"
+                          class="input-field head-field"
+                          contenteditable="true"
+                          spellcheck="true"
+                          onclick="selectAll()"
+                        >
+                          Enter Full Name
+                        </h1>
+                        <p style="font-size: 15pt">
+                          <b
+                            >Dhirubhai Ambani Institute of Information and
+                            Communication Technology</b
+                          >
+                        </p>
+                        <p>
+                          <span class="w-60 inline-block">
+                            <span><b>Email:</b></span>
+                            <span
+                              id="e-mail"
+                              class="input-field head-field"
+                              contenteditable="true"
+                              spellcheck="true"
+                              onclick="selectAll()"
+                              >user@example.com</span
+                            >
+                          </span>
+                          <span class="w-40 text-right"
+                            ><b>DOB:</b>
+                            <span
+                              id="dob"
+                              class="input-field head-field"
+                              contenteditable="true"
+                              spellcheck="true"
+                              onclick="selectAll()"
+                            >
+                              Eg: January 1, 1991</span
+                            >
+                          </span>
+                        </p>
+                        <p>
+                          <b>Address:</b>
+                          <span
+                            id="address"
+                            contenteditable="true"
+                            class="input-field head-field"
+                            spellcheck="true"
+                            onclick="selectAll()"
+                          >
+                            Home or College address</span
+                          >
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <hr style="border-bottom: 1px inset black" />
+
+                  <table id="education-table" class="w-100 section">
+                    <thead>
+                      <tr>
+                        <td colspan="4" class="section-header">
+                          <h3>EDUCATION</h3>
+                        </td>
+                      </tr>
+
+                      <tr class="text-center">
+                        <th colspan="1" class="text-left">Degree</th>
+                        <th colspan="1">University/Institute</th>
+                        <th colspan="1">Year</th>
+                        <th colspan="1">CPI/Aggregate</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td
+                          id="degree"
+                          contenteditable="true"
+                          spellcheck="true"
+                          class="input-field"
+                          onclick="selectAll()"
+                        >
+                          <b>B.Tech | ICT</b>
+                        </td>
+                        <td
+                          id="university-name"
+                          contenteditable="true"
+                          spellcheck="true"
+                          class="input-field"
+                          onclick="selectAll()"
+                        >
+                          Dhirubhai Ambani Institute of Information and
+                          Communication Technology
+                        </td>
+                        <td
+                          id="grad-year"
+                          contenteditable="true"
+                          spellcheck="true"
+                          class="input-field"
+                          onclick="selectAll()"
+                        >
+                          Year of completion
+                        </td>
+                        <td
+                          id="cpi"
+                          class="text-center input-field"
+                          contenteditable="true"
+                          spellcheck="true"
+                          onclick="selectAll()"
+                        >
+                          xx.xx
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          id="class12"
+                          contenteditable="true"
+                          spellcheck="true"
+                          class="input-field"
+                          onclick="selectAll()"
+                        >
+                          <b>Higher Secondary | Class XII</b>
+                        </td>
+                        <td
+                          id="class12-school"
+                          contenteditable="true"
+                          spellcheck="true"
+                          class="input-field"
+                          onclick="selectAll()"
+                        >
+                          Name of the Highschool (Education Board)
+                        </td>
+                        <td
+                          id="class12-pass-year"
+                          contenteditable="true"
+                          spellcheck="true"
+                          class="input-field"
+                          onclick="selectAll()"
+                        >
+                          Year of completion
+                        </td>
+                        <td
+                          id="class12-percentage"
+                          class="text-center input-field"
+                          contenteditable="true"
+                          spellcheck="true"
+                          onclick="selectAll()"
+                        >
+                          xx%
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          id="class10"
+                          contenteditable="true"
+                          spellcheck="true"
+                          class="input-field"
+                          onclick="selectAll()"
+                        >
+                          <b>Secondary | Class X</b>
+                        </td>
+                        <td
+                          id="class10-school"
+                          contenteditable="true"
+                          spellcheck="true"
+                          class="input-field"
+                          onclick="selectAll()"
+                        >
+                          Name of the Highschool (Education Board)
+                        </td>
+                        <td
+                          id="class10-pass-year"
+                          contenteditable="true"
+                          spellcheck="true"
+                          class="input-field"
+                          onclick="selectAll()"
+                        >
+                          Year of completion
+                        </td>
+                        <td
+                          id="class10-percentage"
+                          class="text-center input-field"
+                          contenteditable="true"
+                          spellcheck="true"
+                          onclick="selectAll()"
+                        >
+                          xx%
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td colspan="4" class="text-right">
+                          <button class="addButton" onclick="arrange(this)">
+                            Arrange
+                          </button>
+                          <button
+                            id="add-education"
+                            class="addButton"
+                            onclick="addEducation()"
+                          >
+                            Add
+                          </button>
+                          <button
+                            id="remove-education"
+                            class="removeButton"
+                            onclick="removeRow('education-table',this)"
+                          >
+                            Remove Last
+                          </button>
+                        </td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                  <br />
+                  <table id="skills-table" class="w-100 section">
+                    <thead>
+                      <tr>
+                        <td colspan="2" class="section-header">
+                          <h3>SKILLS</h3>
+                        </td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="w-30">
+                          <b>Expertise Area/Area(s) of Interest</b>
+                        </td>
+                        <td
+                          id="expertise"
+                          class="w-70 input-field"
+                          contenteditable="true"
+                          spellcheck="true"
+                          onclick="selectAll()"
+                        >
+                          eg. Data Structures and Algorithms
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="w-30"><b>Programming Language(s)</b></td>
+                        <td
+                          id="prog-languages"
+                          class="w-70 input-field"
+                          contenteditable="true"
+                          spellcheck="true"
+                          onclick="selectAll()"
+                        >
+                          C, C++, JavaScript etc..
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="w-30"><b>Tools and Technologies</b></td>
+                        <td
+                          id="tools"
+                          class="w-70 input-field"
+                          contenteditable="true"
+                          spellcheck="true"
+                          onclick="selectAll()"
+                        >
+                          Android Studio etc..
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td colspan="2">
+                          <button
+                            id="add-skill"
+                            class="addButton"
+                            onclick="addSkills()"
+                          >
+                            Add Technical Electives
+                          </button>
+                          <button
+                            id="remove-skill"
+                            class="removeButton invisible"
+                            onclick="removeRow('skills-table')"
+                          >
+                            Remove
+                          </button>
+                        </td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                  <hr />
+
+                  <table id="internships-table" class="w-100 section">
+                    <thead>
+                      <td colspan="3" class="section-header">
+                        <h3>PROFESSIONAL EXPERIENCE/INTERNSHIPS</h3>
+                      </td>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td
+                          valign="top"
+                          class="w-20 input-field"
+                          contenteditable="true"
+                          spellcheck="true"
+                          onclick="selectAll()"
+                        >
+                          <b>Name of Organization (Rural/Industrial)</b>
+                        </td>
+                        <td valign="top" class="w-60">
+                          <p
+                            contenteditable="true"
+                            spellcheck="true"
+                            class="input-field"
+                            onclick="selectAll()"
+                          >
+                            Describe here. Lorem ipsum dolor sit amet,
+                            consectetur adipiscing elit. Quisque pulvinar nibh
+                            in scelerisque bibendum. Phasellus ipsum ipsum,
+                            cursus nec sem sit amet.
+                          </p>
+                          <p>
+                            <i
+                              >Guide:
+                              <span
+                                contenteditable="true"
+                                spellcheck="true"
+                                class="input-field head-field"
+                                onclick="selectAll()"
+                              >
+                                Mr/Prof. xyz
+                              </span>
+                            </i>
+                          </p>
+                        </td>
+                        <td valign="top" class="w-20 text-right">
+                          <p
+                            class="input-field"
+                            contenteditable="true"
+                            spellcheck="true"
+                            onclick="selectAll()"
+                          >
+                            Eg. Dec 2017 - Jan 2018
+                          </p>
+                          <p>
+                            Team Size -
+                            <span
+                              class="input-field team-field"
+                              contenteditable="true"
+                              spellcheck="true"
+                              onclick="selectAll()"
+                              >xx</span
+                            >
+                          </p>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td colspan="3" class="text-right">
+                          <button class="addButton" onclick="arrange(this)">
+                            Arrange
+                          </button>
+                          <button
+                            id="add-internship"
+                            class="addButton"
+                            onclick="addInternships()"
+                          >
+                            Add
+                          </button>
+                          <button
+                            id="remove-internship"
+                            class="removeButton"
+                            onclick="removeRow('internships-table')"
+                          >
+                            Remove Last
+                          </button>
+                        </td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                  <hr />
+                </div>
+              </div>
+
+              <div class="text-center">
+                <div
+                  class="tooltips"
+                  data-tooltip="Add space here to shift PROJECTS to next page"
+                >
+                  <button class="addButton" onclick="addSpace(this)">
+                    Add Space
+                  </button>
+                </div>
+                <button class="removeButton" onclick="removeSpace(this)">
+                  Remove Space
+                </button>
+              </div>
+
+              <div id="resume-page-2" class="row">
+                <div class="col-md-12">
+                  <table id="projects-table" class="w-100 section">
+                    <thead>
+                      <tr>
+                        <td colspan="2" class="section-header">
+                          <h3>PROJECTS</h3>
+                        </td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td valign="top" class="w-20">
+                          <p
+                            contenteditable="true"
+                            spellcheck="true"
+                            class="input-field"
+                            onclick="selectAll()"
+                          >
+                            <b>Name of the Project</b>
+                          </p>
+                          <p>
+                            <i
+                              >Guide:
+                              <span
+                                contenteditable="true"
+                                spellcheck="true"
+                                class="input-field head-field"
+                                onclick="selectAll()"
+                                >Mr/Prof. xyz</span
+                              >
+                            </i>
+                          </p>
+                        </td>
+                        <td
+                          valign="top"
+                          class="w-60 input-field"
+                          contenteditable="true"
+                          spellcheck="true"
+                          onclick="selectAll()"
+                        >
+                          <p>
+                            Describe here. Lorem ipsum dolor sit amet,
+                            consectetur adipiscing elit. Quisque pulvinar nibh
+                            in scelerisque bibendum. Phasellus ipsum ipsum,
+                            cursus nec sem sit amet.
+                          </p>
+                        </td>
+                        <td valign="top" class="w-20 text-right">
+                          <p
+                            class="input-field"
+                            contenteditable="true"
+                            spellcheck="true"
+                            onclick="selectAll()"
+                          >
+                            Eg: June 2017 - Feb 2018
+                          </p>
+                          <p>
+                            Team Size -
+                            <span
+                              class="input-field team-field"
+                              contenteditable="true"
+                              spellcheck="true"
+                              onclick="selectAll()"
+                              >xx</span
+                            >
+                          </p>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td colspan="3" class="text-right">
+                          <button class="addButton" onclick="arrange(this)">
+                            Arrange
+                          </button>
+                          <button
+                            id="add-project"
+                            class="addButton"
+                            onclick="addProjects()"
+                          >
+                            Add
+                          </button>
+                          <button
+                            id="remove-project"
+                            class="removeButton"
+                            onclick="removeRow('projects-table')"
+                          >
+                            Remove Last
+                          </button>
+                        </td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                  <hr />
+                  <div class="text-center">
+                    <div
+                      class="tooltips"
+                      data-tooltip="Add space here to shift following to next page"
+                    >
+                      <button class="addButton" onclick="addSpace(this)">
+                        Add Space
+                      </button>
+                    </div>
+                    <button class="removeButton" onclick="removeSpace(this)">
+                      Remove Space
+                    </button>
+                  </div>
+                  <table class="w-100 section">
+                    <thead>
+                      <tr>
+                        <td colspan="2" class="section-header">
+                          <h3>POSITIONS OF RESPONSIBILITY</h3>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td valign="top">
+                          <ul id="positions-list" class="list"></ul>
+                        </td>
+                      </tr>
+                    </thead>
+
+                    <tfoot>
+                      <tr>
+                        <td>
+                          <button
+                            id="add-position"
+                            class="addButton"
+                            onclick="addtoList('positions-list')"
+                          >
+                            Add
+                          </button>
+                          <button
+                            id="remove-position"
+                            class="removeButton"
+                            onclick="removeRow('positions-list')"
+                          >
+                            Remove Last
+                          </button>
+                        </td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                  <!---->
+                  <hr id="awards-hr" />
+                  <button
+                    id="ach-btn"
+                    class="addButton"
+                    onclick="addAchievements()"
+                  >
+                    Add "Awards and Achievements" Section
+                  </button>
+                  <table id="awards-table" class="w-100 section">
+                    <thead>
+                      <tr>
+                        <td colspan="2" class="section-header">
+                          <h3>
+                            AWARDS AND ACHIEVEMENTS<button
+                              id="remove-awards"
+                              class="removeButton"
+                              onclick="removeAchievements()"
+                            >
+                              Delete
+                            </button>
+                          </h3>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          valign="top"
+                          id="awards-list"
+                          contenteditable="true"
+                          spellcheck="true"
+                          class="input-field"
+                          onclick="selectAll()"
+                        >
+                          Stood first in xyz competition.
+                          <br />
+                          Your highest rating in compititive sites.
+                        </td>
+                      </tr>
+                    </thead>
+                  </table>
+                  <hr />
+                  <table class="w-100 section">
+                    <thead>
+                      <tr>
+                        <td colspan="2" class="section-header">
+                          <h3>INTERESTS AND HOBBIES</h3>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td valign="top">
+                          <ul id="hobbies-list"></ul>
+                        </td>
+                      </tr>
+                    </thead>
+
+                    <tfoot>
+                      <tr>
+                        <td>
+                          <button
+                            id="add-hobby"
+                            class="addButton"
+                            onclick="addtoList('hobbies-list')"
+                          >
+                            Add
+                          </button>
+                          <button
+                            id="remove-hobby"
+                            class="removeButton"
+                            onclick="removeRow('hobbies-list')"
+                          >
+                            Remove Last
+                          </button>
+                        </td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                  <hr />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./js/classic-template.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    
+    <script defer src="./js/sortabletable.js"></script>
+    <script src="./js/nanobar.js"></script>
+    
+    <script>
+      var options = {
+        classname: "my-class",
+        id: "my-id",
+        target: document.getElementById("myDivId"),
+      };
+
+      var nanobar = new Nanobar(options);
+
+      // move bar
+      nanobar.go(30); // size bar 30%
+      nanobar.go(76); // size bar 76%
+
+      // size bar 100% and and finish
+      nanobar.go(100);
+    </script>
+  </body>
+
+  <script>
+    const logoutButton = document.getElementById("logout-button");
+
+    const token = localStorage.getItem("token")
+      ? localStorage.getItem("token")
+      : "";
+
+    const bearer = "BEARER " + token;
+    let isUserLoggedIn = false;
+    let isFromGoogle = false;
+    if (token) isUserLoggedIn = true;
+    // console.log(document.cookie);
+    const myInit = {
+      method: "GET",
+      withCredentials: true,
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: bearer,
+        cookie: document.cookie,
+      },
+      mode: "cors",
+      cache: "default",
+    };
+
+    fetch("/api/profile", myInit)
+      .then((res) => {
+        // console.log(res);
+        if (!res.ok) {
+          throw Error("Could not fetch data for that resource");
+        } else {
+          return res.json();
+        }
+      })
+      .then((jsonRes) => {
+        console.log({ jsonRes });
+        if (!jsonRes.data.user.username) {
+          window.location.href = "login.html";
+        } else {
+          isUserLoggedIn = true;
+
+          if (jsonRes.data.user.isAdmin) {
+            document.getElementById("admin-dashboard").style.display = "inline";
+          }
+          if (jsonRes.data.user.googleId) isFromGoogle = true;
+          document.getElementById("user-image").src =
+            jsonRes.data.user.photoURL;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        //
+      });
+
+    // implementing logout API call
+    logoutButton.addEventListener("click", (e) => {
+      myInit.method = "GET";
+      let url = "/api/" + (isFromGoogle ? "login/auth/google/" : "") + "logout";
+      fetch(url, myInit)
+        .then((res) => {
+          if (!res.ok) {
+            throw Error("Could not fetch data for that resource");
+          } else {
+            return res.json();
+          }
+        })
+        .then((jsonRes) => {
+          console.log({ jsonRes });
+          localStorage.removeItem("token");
+          window.location.href = "index.html";
+        })
+        .catch((err) => console.log(err));
+    });
+  </script>
+</html>
