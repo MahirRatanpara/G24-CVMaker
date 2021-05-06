@@ -1,0 +1,520 @@
+@font-face {
+  font-family: "product_sans_blackregular";
+  src: url("../Fonts/productsans-regular-webfont.woff2") format("woff2"),
+    url("../Fonts/productsans-regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "product_sansbold";
+  src: url("../Fonts/productsans-bold-webfont.woff2") format("woff2"),
+    url("../Fonts/productsans-bold-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "product_sansregular";
+  src: url("../Fonts/productsans-regular-webfont.woff2") format("woff2"),
+    url("../Fonts/productsans-regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@import url(//db.onlinewebfonts.com/c/7dca09e227fdfe16908cebb4244589e4?family=Georgia);
+
+.mrg {
+  margin: 1rem;
+}
+
+body {
+  background-color: rgb(248, 248, 255);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+* {
+  font-family: "Georgia";
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+
+::-webkit-scrollbar {
+  width: 0.9rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d5dbeb;
+  width: 0.6rem;
+  border-radius: 1rem;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f0f1fcdc;
+  border-radius: 0.01rem;
+  box-shadow: inset 0 0 2px rgba(19, 15, 41, 0.2);
+  padding: 0 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c2c3ce;
+}
+
+.fixed-position {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 10% 0.05rem 10%;
+  background: rgba(232, 234, 250, 0.5);
+  -webkit-backdrop-filter: blur(30px);
+  backdrop-filter: blur(30px);
+  width: 100%;
+}
+
+header {
+  margin-top: 0;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: rgba(231, 233, 250, 0.2);
+  -webkit-backdrop-filter: blur(18px);
+  -o-backdrop-filter: blur(18px);
+  -moz-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+}
+
+li,
+a {
+  font-family: "product_sansregular", Arial, sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #24419f;
+  text-decoration: none;
+}
+
+.avatar-btn {
+  border-radius: 1.2rem;
+  border-width: 0;
+  margin: 0 0 0 0;
+  padding: 0;
+}
+
+.brand-name {
+  margin: -0.6rem 0 0 0;
+  text-decoration: none;
+  color: black;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.brand-name:hover {
+  margin: -0.6rem 0 0 0;
+  text-decoration: none;
+  color: black;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.avatar-img {
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 100%;
+  margin: -0.2rem 0 0 0;
+  padding: 0;
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.avatar-btn:hover {
+  box-shadow: 0px 4px 40px rgba(27, 90, 148, 0.1);
+}
+
+.nav_links li {
+  display: inline-block;
+}
+
+.nav_links {
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.nav_links li a {
+  text-decoration: none;
+  font-size: 1.2rem;
+  padding: 0.6rem 1.6rem;
+  border-radius: 1rem;
+}
+
+.nav_links li a:hover {
+  color: #41249fd7;
+  background-color: #3053c50a;
+}
+
+.crt {
+  height: 1.3rem;
+  width: 1.3rem;
+  margin-top: -12px;
+  margin-left: 0.7rem;
+}
+
+.submit-right-arrow {
+  height: 1.6rem;
+  width: 1.6rem;
+  margin-left: 0.7rem;
+  margin-top: -0.1rem;
+}
+
+.btn-submit {
+  height: 46px;
+  width: 167px;
+  display: flex;
+  justify-content: center;
+  background: #24419f;
+  border-radius: 25px;
+  font-family: "product_sansbold", Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  padding-top: 0.6rem;
+}
+.btn-submit:hover {
+  box-shadow: 0px 4px 20px rgba(27, 90, 148, 0.2);
+}
+
+.title-margin {
+  margin-top: 2rem;
+  font-weight: bold;
+  letter-spacing: 1.6px;
+}
+
+.active-page {
+  color: #4c6fe4;
+}
+
+.nav_links .dropdown-menu {
+  border-radius: 1rem;
+  border-color: #ffffff;
+  box-shadow: 2px 16px 32px rgba(124, 124, 124, 0.1);
+  padding: 0;
+  margin-left: -2.8rem;
+}
+
+.action-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.4rem;
+  background-color: white;
+  width: 44%;
+  margin: 3rem auto;
+  border-radius: 3rem;
+  box-shadow: 0.6px 4px 40px rgba(5, 31, 56, 0.06);
+}
+
+.action-panel-btn {
+  color: white;
+  background-color: #24419f;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.4rem 1.6rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  transition: all 0.12s ease-in-out 0s;
+  font-family: "product_sansregular", Arial, sans-serif;
+}
+
+.action-panel-btn:hover {
+  color: white;
+  text-decoration: none;
+  box-shadow: 0.6px 4px 10px rgba(27, 89, 148, 0.2);
+}
+
+.action-panel-btn:focus {
+  outline: none;
+}
+
+/*----------------- CV Form ----------------*/
+
+.my-resume-page {
+  background-color: white;
+  margin-top: 1rem;
+  border-radius: 0.6rem;
+  margin-bottom: 20vh;
+  box-shadow: 2px 10px 60px rgba(137, 186, 231, 0.1);
+}
+
+/*----------------- Testing -------------------*/
+
+#stud-name {
+  font-weight: 400;
+  padding-bottom: 15px;
+  font-size: 40pt;
+}
+table td {
+  font-size: 1.2rem;
+}
+.w-20 {
+  width: 20%;
+}
+
+.w-25 {
+  width: 25%;
+}
+
+.w-30 {
+  width: 30%;
+}
+
+.w-40 {
+  width: 40%;
+}
+
+.w-45 {
+  width: 45%;
+}
+
+.w-70 {
+  width: 70%;
+}
+
+.w-80 {
+  width: 80%;
+}
+
+.w-60 {
+  width: 60%;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+#logo {
+  padding-left: 3%;
+}
+.intro {
+  padding: 5px;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.page-approximation {
+  position: absolute;
+  display: block;
+  padding-top: 400mm;
+}
+.page-approximation .text-position {
+  position: relative;
+  right: 100%;
+  font-weight: 500;
+}
+
+.rowbackground {
+  background: rgb(236, 233, 233);
+  border-radius: 3px;
+}
+.rowbackground td {
+  padding-top: 50px;
+}
+
+tbody tr,
+td {
+  /*
+    this effect is given to rows when arrange button is clicked
+    border-top: 1px solid aliceblue;
+      background: rgba(28, 206, 230, 0.753);
+      padding: 10px;*/
+  transition: padding 0.7s ease-in-out;
+}
+
+.my-side-line {
+  border-left: 5px solid rgb(14, 2, 80);
+  padding-left: 20px;
+  border-collapse: separate;
+}
+
+.head-field {
+  display: inline-block;
+  min-width: 50px;
+}
+.team-field {
+  display: inline-block;
+  min-width: 10px;
+}
+
+.input-field:hover {
+  background: #f0f4ffb0;
+}
+
+.invisible {
+  display: none;
+}
+
+#add-skill {
+  margin: 1rem auto;
+}
+
+#ach-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem auto 0 auto;
+  font-size: 14pt;
+  transition: opacity 0.4s ease-in-out;
+  opacity: 0;
+}
+
+#awards-table {
+  transition: opacity 0.4s ease-in-out;
+}
+
+.addButton {
+  color: white;
+  background-color: #4662c8;
+  padding: 0.4rem 1.6rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 2rem;
+  margin: 0 0.2rem;
+  font-weight: bold;
+  letter-spacing: 1.6px;
+  font-family: "product_sansregular", Arial, sans-serif;
+}
+
+.addButton:hover {
+  background-color: #24419f;
+  cursor: pointer;
+}
+
+.addButton:focus {
+  outline: none;
+}
+
+.removeButton {
+  font-family: "product_sans_blackregular", Arial, sans-serif;
+  color: #f33131;
+  background-color: #f3313118;
+  border: #f3313104 solid 3px;
+  padding: 0.4rem 1.6rem;
+  font-size: 1rem;
+  border-radius: 2rem;
+  margin: 0 0.2rem;
+  font-weight: 900;
+  letter-spacing: 1.6px;
+  margin-top: 0.8rem;
+  outline: none;
+}
+
+.removeButton:hover {
+  cursor: pointer;
+  background-color: #f33131ce;
+  border: #f3313105 solid 3px;
+  color: white;
+}
+
+.removeButton:focus {
+  outline: none;
+}
+
+#remove-awards {
+  margin-left: 1.4rem;
+  margin-top: -1rem;
+}
+
+.my-resume-bg {
+  background: rgb(236, 233, 233);
+}
+
+.my-controls {
+  margin: 15px 15px;
+  text-align: center;
+  background-color: white;
+  padding: 20px 30px;
+  /*border-radius: 20px 20px 20px 20px;*/
+  box-shadow: 0 20px 22px rgba(0, 0, 0, 0.27);
+  border-radius: 2px;
+}
+
+.my-controls ul {
+  list-style: none;
+  margin-bottom: 0%;
+}
+
+.my-controls ul li {
+  display: inline-block;
+}
+
+.save-message {
+  position: fixed;
+  z-index: 1000;
+  display: none;
+  top: 25px;
+  left: 47%;
+  padding: 5px 15px;
+  color: aliceblue;
+  background: rgb(44, 187, 75);
+  border: none;
+  border-radius: 4px;
+  transition: 0.7s ease-out;
+  font-size: 10pt;
+  font-weight: 500;
+}
+
+@media only screen and (max-width: 800px) {
+  #logo {
+    display: none;
+  }
+}
+
+/*------------- Tool-tip ------------------*/
+.tooltips {
+  display: inline-block;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.tooltips::before,
+.tooltips::after {
+  position: absolute;
+  left: 50%;
+  opacity: 0;
+  transition: all 0.1s ease-in;
+}
+
+.tooltips::before {
+  /* for arrow */
+  content: "";
+  border-width: 10px 8px 0px 8px;
+  border-style: solid;
+  border-color: white transparent transparent transparent;
+  top: -6px;
+  z-index: 1000;
+}
+.tooltips::after {
+  content: attr(data-tooltip);
+  background: white;
+  color: #24419f;
+  font-weight: bolder;
+  letter-spacing: 1px;
+  padding: 10px;
+  box-shadow: 2px 4px 20px rgba(124, 132, 192, 0.3);
+  border-radius: 1rem;
+  width: 260px;
+  top: -80px;
+  margin-left: -100px;
+}
+
+.tooltips:hover::before,
+.tooltips:hover::after {
+  opacity: 1;
+}
+
+input:focus {
+  outline: none;
+}
