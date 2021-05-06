@@ -313,3 +313,377 @@ function removeAchievements() {
       document.getElementById("awards-hr").style.display = "none";
   }, 400);
 }
+
+
+function saveResume() {
+  //Heading
+  // var template = document.getElementById("template-name").innerHTML;
+  var studentname = document.getElementById("stud-name").innerHTML;
+  var emailaddr = document.getElementById("e-mail").innerHTML;
+  // var dob = new Date(document.getElementById("dob").innerText);
+  var address = document.getElementById("address").innerHTML;
+  var profile = document.getElementById("profile").innerHTML;
+  var tablerows;
+  var i, j;
+  //Education
+  tablerows = document.getElementById("education-table").tBodies[0].rows;
+  //console.log(tablerows.length);
+  var edu_tabledata = [];
+  for (i = 0; i < tablerows.length; i++) {
+    edu_tabledata[i] = [];
+    var rowcells = tablerows[i].cells;
+    console.log(rowcells, rowcells.length);
+    for (j = 0; j < Math.min(4, rowcells.length); j++)
+      edu_tabledata[i][j] = rowcells[j].innerHTML;
+    //console.log(i);
+  }
+  // console.log(edu_tabledata);
+  //Skills
+  // tablerows = document.getElementById("skills-table").tBodies[0].rows;
+  // var skills_tabledata = [];
+  // for (i = 0; i < tablerows.length; i++) {
+  //   skills_tabledata.push(tablerows[i].cells[0].innerHTML);
+  // }
+  // console.log(skills_tabledata);
+  //Internships
+  tablerows = document.getElementById("internships-table").tBodies[0].rows;
+  var internships_tabledata = [];
+  for (i = 0; i < tablerows.length; i++) {
+    internships_tabledata[i] = [];
+    for (j = 0; j < 3; j++) {
+      internships_tabledata[i][j] = tablerows[i].cells[j].innerHTML;
+    }
+    //console.log(i);
+  }
+
+  //positions
+  var ul = document.getElementById("positions-list");
+  var positions_list = ul.innerHTML;
+  //hobbies
+  ul = document.getElementById("hobbies-list");
+  var hobbies_list = ul.innerHTML;
+  //achievments
+  var awards_list = document.getElementById("awards-list").innerHTML;
+
+  //make resume dictionary map
+  var resumeDetails = {
+    fullName: studentname,
+    institute:
+      "Dhirubhai Ambani Institute of Information and Communication Technology",
+    email: emailaddr,
+    profile: profile,
+    // DOB: dob,
+    address: address,
+    education: edu_tabledata,
+    // skills: skills_tabledata,
+    internships: internships_tabledata,
+    positionOfResponiblity: positions_list,
+    intrestAndHobbies: hobbies_list,
+    achievements: awards_list,
+  };
+
+  console.log(resumeDetails);
+  return resumeDetails;
+}
+
+const loadResume = async function () {
+  const token = localStorage.getItem("token")
+    ? localStorage.getItem("token")
+    : "";
+
+  const bearer = "BEARER " + token;
+  let isUserLoggedIn = false;
+  let isFromGoogle = false;
+  if (token) isUserLoggedIn = true;
+  // console.log(document.cookie);
+  const myInit = {
+    method: "GET",
+    withCredentials: true,
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: bearer,
+      cookie: document.cookie,
+    },
+    mode: "cors",
+    cache: "default",
+  };
+
+  let resumesObj;
+  const res = await fetch("/api/profile", myInit);
+  try {
+    if (!res.ok) {
+      throw Error("Could not fetch data for that resource");
+    } else {
+      const jsonRes = await res.json();
+      console.log({ jsonRes });
+      resumesObj = jsonRes.data.user?.resumes;
+      try {
+        let flag = true;
+        for (let x of resumesObj) {
+          if (x.index === 2) {
+            flag = false;
+            break;
+          }
+        }
+        if (flag) {
+          myInit.method = "POST";
+          myInit.body = JSON.stringify({ index: 2 });
+          console.log("here0");
+
+          const res = await fetch("/api/resumeData", myInit);
+          console.log("here1");
+
+          const jsonRes = await res.json();
+          console.log("here2");
+          if (!jsonRes.success) throw Error("error");
+          console.log(jsonRes);
+          resumesObj.push({ index: 2, id: jsonRes.data.resumeId });
+          console.log(resumesObj);
+        }
+        console.log(jsonRes);
+      } catch (err) {
+        console.log(err);
+      }
+
+      if (!jsonRes.data.user.username) {
+        window.location.href = "login.html";
+      } else {
+        isUserLoggedIn = true;
+
+        if (jsonRes.data.user.isAdmin) {
+          document.getElementById("admin-dashboard").style.display = "inline";
+        }
+        if (jsonRes.data.user.googleId) isFromGoogle = true;
+        document.getElementById("user-image").src = jsonRes.data.user.photoURL;
+      }
+    }
+  } catch (err) {
+    console.log(err);
+  }
+  // console.log(document.cookie);
+  //   if (!resumesObj) return;
+  let resumeId;
+  for (let i = 0; i < resumesObj.length; i++) {
+    if (resumesObj[i].index == 2) {
+      resumeId = resumesObj[i].id;
+      break;
+    }
+  }
+  myInit.method = "GET";
+  delete myInit.body;
+  fetch(`/api/resumeData/${resumeId}`, myInit)
+    .then((res) => res.json())
+    .then((jsonRes) => {
+      console.log(jsonRes);
+      const resumeData = jsonRes.data.resumeData;
+
+      let tablerows, i, j;
+      // personal info
+      document.getElementById("stud-name").innerHTML = "" + resumeData.fullName;
+      document.getElementById("e-mail").innerHTML = "" + resumeData.email;
+      document.getElementById("profile").innerHTML = "" + resumeData.profile;
+
+      // document.getElementById("dob").innerHTML =
+      //   "" + resumeData.DOB?.slice(0, 10);
+      document.getElementById("address").innerHTML = "" + resumeData.address;
+
+      // education
+      if(resumeData?.education && resumeData?.education.length>0) {
+        tablerows = document.getElementById("education-table").tBodies[0].rows;
+        let edu_tabledata = resumeData?.education || [];
+        let rowstobeupdated = edu_tabledata.length;
+        while (rowstobeupdated - tablerows.length > 0) {
+          addEducation();
+          tablerows = document.getElementById("education-table").tBodies[0].rows;
+        } //addextra rows bcoz database has more rows then html table
+        while (tablerows.length - rowstobeupdated > 0) {
+          removeRow("education-table");
+          tablerows = document.getElementById("education-table").tBodies[0].rows;
+        } //remove rows bcoz default html has more rows then database
+  
+        console.log(tablerows);
+        console.log(edu_tabledata);
+        for (i = 0; i < rowstobeupdated; i++) {
+          //update rows
+          for (j = 0; j < 4; j++)
+            tablerows[i].cells[j].innerHTML = edu_tabledata[i][j];
+          //console.log(i);
+        }
+
+      }
+
+      // tablerows = document.getElementById("skills-table").tBodies[0].rows;
+      // let skills_tabledata = resumeData?.skills || [];
+      // rowstobeupdated = skills_tabledata.length;
+      // while (rowstobeupdated - tablerows.length > 0) {
+      //   addSkills();
+      //   tablerows = document.getElementById("skills-table").tBodies[0].rows;
+      // } //when database has more rows
+      // while (tablerows.length - rowstobeupdated > 0) {
+      //   removeRow("skills-table");
+      //   tablerows = document.getElementById("skills-table").tBodies[0].rows;
+      // } //when defalt html page got more rows
+      // for (i = 0; i < rowstobeupdated; i++) {
+      //   tablerows[i].cells[1].innerHTML = skills_tabledata[i];
+      // }
+
+      //Internships
+      if(resumeData?.internships && resumeData?.internships.length>0){
+        tablerows = document.getElementById("internships-table").tBodies[0].rows;
+        let internships_tabledata = resumeData?.internships || [];
+        rowstobeupdated = internships_tabledata.length;
+        while (rowstobeupdated - tablerows.length > 0) {
+          addInternships();
+          tablerows = document.getElementById("internships-table").tBodies[0]
+            .rows;
+        }
+        while (tablerows.length - rowstobeupdated > 0) {
+          removeRow("internships-table");
+          tablerows = document.getElementById("internships-table").tBodies[0]
+            .rows;
+        }
+        for (i = 0; i < rowstobeupdated; i++) {
+          for (j = 0; j < 3; j++) {
+            tablerows[i].cells[j].innerHTML = internships_tabledata[i][j];
+          }
+        }
+
+      }
+
+      //Projects
+
+      //positions
+      if (resumeData["positionOfResponiblity"] != null) {
+        document.getElementById("positions-list").innerHTML =
+          resumeData["positionOfResponiblity"];
+      }
+
+      //hobbies
+      if (resumeData["intrestAndHobbies"]) {
+        document.getElementById("hobbies-list").innerHTML =
+          resumeData["intrestAndHobbies"];
+      }
+      //positions
+      if (resumeData["achievements"] != null) {
+        document.getElementById("awards-list").innerHTML =
+          resumeData["achievements"];
+      }
+    })
+    .catch((err) => console.log(err));
+};
+
+submitBtn.addEventListener("click", async (e) => {
+  const token = localStorage.getItem("token")
+    ? localStorage.getItem("token")
+    : "";
+
+  const bearer = "BEARER " + token;
+  let isUserLoggedIn = false;
+  let isFromGoogle = false;
+  if (token) isUserLoggedIn = true;
+  // console.log(document.cookie);
+  const myInit = {
+    method: "GET",
+    withCredentials: true,
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: bearer,
+      cookie: document.cookie,
+    },
+    mode: "cors",
+    cache: "default",
+  };
+
+  let resumesObj;
+  const res = await fetch("/api/profile", myInit);
+  try {
+    if (!res.ok) {
+      throw Error("Could not fetch data for that resource");
+    } else {
+      const jsonRes = await res.json();
+      console.log({ jsonRes });
+      resumesObj = jsonRes.data.user.resumes;
+      if (!jsonRes.data.user.username) {
+        window.location.href = "login.html";
+      } else {
+        isUserLoggedIn = true;
+
+        if (jsonRes.data.user.isAdmin) {
+          document.getElementById("admin-dashboard").style.display = "inline";
+        }
+        if (jsonRes.data.user.googleId) isFromGoogle = true;
+        document.getElementById("user-image").src = jsonRes.data.user.photoURL;
+      }
+    }
+  } catch (err) {
+    console.log(err);
+  }
+
+  e.preventDefault();
+  const resumeBody = saveResume();
+  console.log(resumesObj);
+  let resumeId;
+  for (let i = 0; i < resumesObj.length; i++) {
+    if (resumesObj[i].index == 2) {
+      resumeId = resumesObj[i].id;
+      break;
+    }
+  }
+  if (!resumeId) {
+    console.error("resume id not found, can't proceed");
+  } else {
+    myInit.method = "POST";
+    myInit.body = JSON.stringify(resumeBody);
+    fetch(`/api/resumeData/${resumeId}`, myInit)
+      .then((res) => res.json())
+      .then((jsonRes) => {
+        console.log(jsonRes);
+        const alertDiv = document.getElementById("alert-message");
+          alertDiv.innerHTML = "";
+          alertDiv.style.display = "flex";
+          const newDiv = document.createElement("div");
+          newDiv.style.width = "fit-content";
+
+          // alertDiv.setAttribute("justify-content","center");
+          // alertDiv.setAttribute("align-items","center");
+          const str = "alert alert-success alert-dismissible fade show container-md";
+          str.split(" ").forEach((c)=>newDiv.classList.add(c));
+            newDiv.innerHTML = jsonRes.data.msg;
+
+          const newBtn = document.createElement("button");
+          newBtn.classList.add("btn-close");
+          newBtn.setAttribute("data-bs-dismiss","alert");
+          newBtn.setAttribute("aria-label","Close");
+        
+
+          newDiv.append(newBtn);
+          alertDiv.append(newDiv);
+      })
+      .catch((err) => {
+        console.log(err);
+        const alertDiv1 = document.getElementById("alert-message-warn");
+        alertDiv1.innerHTML = "";
+        alertDiv1.style.display = "flex";
+        const newDiv = document.createElement("div");
+        newDiv.style.width = "fit-content";
+        // alertDiv1.setAttribute("justify-content","center");
+        // alertDiv1.setAttribute("align-items","center");
+        const str = "alert alert-danger alert-dismissible fade show container-md";
+        str.split(" ").forEach((c)=>newDiv.classList.add(c));        
+          newDiv.innerHTML = err;
+
+        const newBtn = document.createElement("button");
+        newBtn.classList.add("btn-close");
+        newBtn.setAttribute("data-bs-dismiss","alert");
+        newBtn.setAttribute("aria-label","Close");
+      
+
+        newDiv.append(newBtn);
+        alertDiv1.append(newDiv);
+      });
+  }
+});
+
+loadResume(); //will get called on page load
