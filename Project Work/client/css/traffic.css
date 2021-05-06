@@ -1,0 +1,257 @@
+.mrg {
+  margin: 1rem;
+}
+
+* {
+  font-family: "product_sansregular", Arial, sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin-bottom: 10rem;
+  background: #e5e5e5;
+}
+
+li,
+a {
+  font-family: "product_sansregular", Arial, sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #24419f;
+  text-decoration: none;
+}
+
+.avatar-btn {
+  border-radius: 1.2rem;
+  border-width: 0;
+  margin: -32px 0;
+  padding: 0;
+
+  box-shadow: 0px 1px 20px rgba(30, 34, 37, 0.2);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 10% 0.05rem 10%;
+  background-color: #24419f09;
+}
+
+/* .brand-name {
+    position: absolute;
+  width: 148px;
+  height: 24px;
+  left: 95px;
+  top: 32px;
+  white-space: nowrap;
+  font-family: Product Sans rgb(78, 52, 223);
+  font-style: normal;
+  font-weight: 900;
+  font-size: 29px;
+  line-height: 24px;
+  
+  display: flex;
+  align-items: center;
+  
+  color: #24419F;
+  } */
+
+/*------------CV CARDS-------------------*/
+
+/* .nav-css{
+      position: absolute;
+    width: 1440px;
+    height: 84px;
+    left: 0px;
+    top: 0px;
+  
+    background: rgba(244, 245, 248, 0.6);
+    mix-blend-mode: normal;
+    backdrop-filter: blur(20px);
+  } */
+
+/* .admin{
+    position: absolute;
+  
+  left: 1194px;
+  top: 30px; */
+
+/* identical to box height, or 86% */
+/* 
+  display: flex;
+  align-items: center;
+  
+  color: #000000;
+  } */
+
+.search-css {
+  position: absolute;
+  width: 413px;
+  height: 62px;
+  left: 144px;
+  top: 248px;
+  border-color: rgba(113, 120, 247, 0.14);
+
+  background: rgba(123, 129, 240, 0.14);
+  border-radius: 21px;
+}
+
+::placeholder {
+  font-family: Product Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 28px;
+  line-height: 24px;
+  color: #24419f;
+}
+
+.list {
+  position: absolute;
+  width: 1152px;
+  height: 55px;
+  left: 144px;
+  top: 677px;
+
+  background: rgba(219, 219, 221, 0.1);
+  border-radius: 7px;
+}
+
+.delete-css {
+  position: absolute;
+  left: 58.33%;
+  right: 33.33%;
+  top: 45.83%;
+  bottom: 29.17%;
+
+  background: #24419f;
+}
+
+.traffic-css {
+  position: absolute;
+  width: 200px;
+  height: 65px;
+  left: 923px;
+  top: 126px;
+  font-family: Product Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 28px;
+  line-height: 24px;
+  color: #24419f;
+
+  background: rgba(188, 191, 255, 0.2);
+  border-radius: 26px;
+}
+
+.heading {
+  position: absolute;
+  width: 100px;
+  height: 30px;
+  left: 144px;
+  top: 132px;
+
+  font-family: Product Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 24px;
+  /* or 43% */
+
+  display: flex;
+  align-items: center;
+
+  color: #000000;
+}
+
+.icon-css {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+
+  background: #ffffff;
+  opacity: 0;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background: #e5e5e5;
+
+  color: #fff;
+  /* Push to bottom */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100vh;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  overflow: auto;
+}
+
+header {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  /* align-items: center;
+  justify-content: center; */
+}
+
+nav {
+  justify-content: right;
+  align-items: right;
+}
+
+header h1 {
+  font-size: 60px;
+}
+
+.counters {
+  background: #0f479a;
+  color: #fff;
+  padding: 40px 20px;
+  border-top: 3px lightskyblue solid;
+}
+
+.counters .container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 30px;
+  text-align: center;
+}
+
+.counters i {
+  color: lightskyblue;
+  margin-bottom: 5px;
+}
+
+.counters .counter {
+  font-size: 45px;
+  margin: 10px 0;
+}
+
+@media (max-width: 700px) {
+  .counters .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .counters .container > div:nth-of-type(1),
+  .counters .container > div:nth-of-type(2) {
+    border-bottom: 1px lightskyblue solid;
+    padding-bottom: 20px;
+  }
+}
