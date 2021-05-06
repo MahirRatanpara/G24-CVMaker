@@ -31,6 +31,30 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  outline: none;
+}
+
+::-webkit-scrollbar {
+  width: 0.9rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d5dbeb;
+  width: 0.6rem;
+  border-radius: 1rem;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f0f1fcdc;
+  border-radius: 1rem;
+  box-shadow: inset 0 0 4px rgba(19, 15, 41, 0.2);
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f0f1fcdc;
+  border-radius: 0.01rem;
+  box-shadow: inset 0 0 2px rgba(19, 15, 41, 0.2);
+  padding: 0 4px;
 }
 
 body {
@@ -53,18 +77,35 @@ a {
   padding: 0;
 }
 
-header {
+.fixed-position {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 10% 0.05rem 10%;
-  background-color: #24419f09;
+  background: rgba(255, 255, 255, 0.637);
+  -webkit-backdrop-filter: blur(30px);
+  backdrop-filter: blur(30px);
+  width: 100%;
+}
+
+header {
+  margin-top: 0;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: rgba(230, 231, 248, 0.5);
+  -webkit-backdrop-filter: blur(12px);
+  -o-backdrop-filter: blur(12px);
+  -moz-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
 }
 
 .brand-name {
   margin: -0.6rem 0 0 0;
   text-decoration: none;
-  color: black;
+  color: blue;
   font-size: 1.6rem;
   font-weight: 600;
 }
@@ -72,7 +113,7 @@ header {
 .brand-name:hover {
   margin: -0.6rem 0 0 0;
   text-decoration: none;
-  color: black;
+  color: #41249fd7;
   font-size: 1.6rem;
   font-weight: 600;
 }
@@ -231,7 +272,7 @@ header {
   width: 345px;
   height: 650px;
   border-color: #24419f00;
-  box-shadow: 2px 16px 32px rgba(124, 124, 124, 0.1);
+  box-shadow: -2px 8px 32px rgba(124, 124, 124, 0.12);
   background: #f4f5f7;
   border-radius: 22px;
   margin-top: 2rem;
@@ -239,7 +280,7 @@ header {
 }
 
 .card:hover {
-  box-shadow: 0px 4px 20px rgba(32, 49, 146, 0.15);
+  box-shadow: 0px 14px 36px rgba(32, 49, 146, 0.16);
 }
 
 .card-image-section {
@@ -293,10 +334,12 @@ header {
   padding: 0.3rem 3.1rem;
   transition: all 0.3s ease-in-out 0s;
   align-self: center;
+  width: 100%;
 }
 
 .btn-edit:hover {
   box-shadow: 0px 4px 20px rgba(27, 90, 148, 0.2);
+  color: white;
 }
 
 /*------------Profile page-------------------*/
@@ -339,9 +382,16 @@ header {
   margin: 0;
 }
 
-.edit-info-panel .readonly-h1 {
+.readonly-h1 {
   padding: 0;
   margin: 0rem 0 1.6rem 0;
+  font-size: 2.4rem;
+  border-style: none;
+}
+
+#staticName {
+  padding: 0;
+  margin: 0rem 0 0rem 0;
   font-size: 2.4rem;
   border-style: none;
 }
@@ -360,7 +410,6 @@ header {
   border-radius: 1.4rem;
   border-color: #ffffff;
   width: 70vw;
-  padding-bottom: 2rem;
 }
 
 .modal-title-custom {
@@ -379,7 +428,7 @@ header {
 .modal-card {
   height: auto;
   margin-left: 0.6rem;
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
 }
 
 .modal-select-btn {
@@ -421,6 +470,14 @@ header {
   border-color: #24419f;
 }
 
+.dropzone {
+  padding: 4rem 0rem;
+  background-color: #f4f4fe;
+  border-radius: 2rem;
+  margin: 2rem 1rem 1rem 1rem;
+  border: 2px dashed #24419f;
+}
+
 .drap-drop-text {
   display: flex;
   justify-content: center;
@@ -449,12 +506,13 @@ header {
   display: flex;
   justify-content: center;
   margin-left: 18rem;
+  margin-bottom: 2.6rem;
 }
 
 /*------------Admin Badge-------------------*/
 .admin-badge {
   padding: 0.4rem 0.1rem;
-  background-color: #24419f;
+  background-color: #d9e2ffb0;
   width: 7.4rem;
   display: flex;
   justify-content: center;
@@ -471,7 +529,7 @@ header {
 }
 
 .admin-badge-text {
-  color: #ffffff;
+  color: #24419f;
   font-weight: bolder;
   letter-spacing: 1.2px;
   margin: 0 0.5rem;
@@ -509,4 +567,51 @@ header {
 
 .delete-acc-text {
   font-size: 1.4rem;
+}
+
+/*------------Modal - Delete Account-------------------*/
+.delete-message-title {
+  display: flex;
+  justify-content: center;
+  font-size: 1.7rem;
+  color: #f04747;
+  font-weight: bolder;
+  letter-spacing: 1.2px;
+}
+
+.delete-message-text {
+  display: flex;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin: 2.2rem auto;
+}
+
+.modal-del-btn {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  background-color: #f04747;
+  font-size: 1.1rem;
+  color: #ffffff;
+  border-radius: 10px;
+  letter-spacing: 1.1px;
+}
+
+.modal-del-btn:hover {
+  background-color: #e72d2d;
+}
+
+.modal-cancel-btn {
+  width: 14%;
+  display: flex;
+  justify-content: center;
+  background-color: #6c757dc5;
+  border: #6c757dc5 solid 0px;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  letter-spacing: 1.1px;
+}
+
+input:focus {
+  outline: none;
 }
