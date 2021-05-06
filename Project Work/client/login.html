@@ -96,7 +96,7 @@
 
         <div class="sign-up-google">
           <button
-            onclick="location.href='http://localhost:5000/api/login/auth/google'"
+            onclick="location.href='/api/login/auth/google'"
             class="btn btn-google"
             type="submit"
             value="submit"
@@ -144,7 +144,7 @@
         password: e.target.elements["password"].value,
       };
       console.log(formData);
-      fetch("http://localhost:5000/api/login", {
+      fetch("/api/login", {
         method: "POST", // or 'PUT',
         mode: "cors",
         headers: {
@@ -152,14 +152,18 @@
         },
         body: JSON.stringify(formData),
       })
-        .then((response) => response.json())
+        .then((response) => {
+          if (!response.ok) throw Error("Incorrect username or password");
+          else return response.json();
+        })
         .then((jsonRes) => {
           // console.log('Success:', jsonRes);
-          localStorage.setItem("token", jsonRes.accessToken);
-          window.location.href = "index.html";
+          localStorage.setItem("token", jsonRes.data.accessToken);
+          window.location.href = "dashboard.html";
         })
         .catch((error) => {
           console.error("Error:", error);
+          // show errors to user
         });
     });
   </script>

@@ -17,7 +17,7 @@ let isFromGoogle = false;
 
 // show profile image
 const profileButton = document.getElementById("MyProfile").children[0];
-fetch("https://g24-cvmake-backend.herokuapp.com/api/profile", myInit)
+fetch("/api/profile", myInit)
   .then((res) => {
     // console.log(res);
     if (!res.ok) {
@@ -27,13 +27,13 @@ fetch("https://g24-cvmake-backend.herokuapp.com/api/profile", myInit)
     }
   })
   .then((jsonRes) => {
-    if (!jsonRes.isAdmin) {
+    if (!jsonRes.data.user.isAdmin) {
       window.location.href = "dashboard.html";
     }
-    console.log(jsonRes.photoURL);
-    profileButton.src = jsonRes.photoURL;
+    console.log(jsonRes.data.user.photoURL);
+    profileButton.src = jsonRes.data.user.photoURL;
 
-    if (jsonRes.googleId) isFromGoogle = true;
+    if (jsonRes.data.user.googleId) isFromGoogle = true;
   })
   .catch((err) => {
     window.location.href = "login.html";
@@ -43,7 +43,7 @@ let users = [];
 //const body=document.getElementById("container");
 const characterList = document.getElementById("feedTable");
 const searchbar = document.getElementById("userSearch");
-const url = "https://g24-cvmake-backend.herokuapp.com/api/users";
+const url = "/api/users";
 fetch(url, myInit)
   .then((res) => {
     // console.log(res);
@@ -135,10 +135,7 @@ const displayFeed = (names) => {
           displayFeed(names);
         }
         myInit.method = "DELETE";
-        fetch(
-          `https://g24-cvmake-backend.herokuapp.com/api/users/${i.username}`,
-          myInit
-        )
+        fetch(`/api/users/${i.username}`, myInit)
           .then((res) => {
             // console.log(res);
             if (!res.ok) {
@@ -176,10 +173,7 @@ const displayFeed = (names) => {
 const logoutButton = document.getElementById("logout-button");
 logoutButton.addEventListener("click", (e) => {
   myInit.method = "GET";
-  let url =
-    "https://g24-cvmake-backend.herokuapp.com/api/" +
-    (isFromGoogle ? "login/auth/google/" : "") +
-    "logout";
+  let url = "/api/" + (isFromGoogle ? "login/auth/google/" : "") + "logout";
   fetch(url, myInit)
     .then((res) => {
       if (!res.ok) {

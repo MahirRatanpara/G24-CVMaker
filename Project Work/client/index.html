@@ -21,7 +21,8 @@
       crossorigin="anonymous"
     ></script>
 
-    <link rel="stylesheet" href="css/index_style.css" />
+    <!-- <link rel="stylesheet" href="css/animation.css" /> -->
+    <link rel="stylesheet" href="css/style.css" />
     
     <title>CVMaker</title>
 
@@ -277,17 +278,13 @@
         mode: "cors",
         cache: "default",
     };
-    fetch("https://g24-cvmake-backend.herokuapp.com/api/profile", myInit)
+    fetch("/api/profile", myInit)
     .then((res) => {
-        // console.log(res);
-        if (!res.ok) {
-            throw Error("Could not fetch data for that resource");
-        } else {
-            return res.json();
-        }
+        return res.json();
     })
     .then((jsonRes)=>{
-        if(!jsonRes.username) 
+        // console.log({jsonRes});
+        if(!jsonRes.success) 
         {
             return;
         }
@@ -296,11 +293,11 @@
         logoutButton.style.display = "inline";
         document.getElementById("dashboard").style.display = "inline";
 
-        if(jsonRes.isAdmin)
+        if(jsonRes.data.user.isAdmin)
         {
             document.getElementById("admin-dashboard").style.display = "inline";
         }
-        if(jsonRes.googleId) isFromGoogle = true;
+        if(jsonRes.data.user.googleId) isFromGoogle = true;
         document.getElementById("login-button").style.display = "none";
         document.getElementById("register-button").style.display = "none";
         
@@ -309,7 +306,7 @@
 
     logoutButton.addEventListener("click",(e)=>{
         myInit.method = "GET";
-        let url = "https://g24-cvmake-backend.herokuapp.com/api/" + (isFromGoogle ? "login/auth/google" : "") + "/logout";
+        let url = "/api/" + (isFromGoogle ? "login/auth/google/" : "") + "logout";
         fetch(url,myInit)
         .then(res=>{
             if (!res.ok) {

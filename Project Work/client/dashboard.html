@@ -268,9 +268,9 @@
   cache: "default",
   };  
 
-  fetch("https://g24-cvmake-backend.herokuapp.com/api/profile", myInit)
+  fetch("/api/profile", myInit)
     .then((res) => {
-        // console.log(res);
+        console.log(res);
         if (!res.ok) {
             throw Error("Could not fetch data for that resource");
         } else {
@@ -279,7 +279,7 @@
     })
     .then((jsonRes)=>{
         console.log({jsonRes});
-        if(!jsonRes.username)
+        if(!jsonRes.success)
         {
           window.location.href = "login.html";
         }
@@ -287,39 +287,47 @@
         {
           isUserLoggedIn = true;
           
-          if(jsonRes.isAdmin)
+          if(jsonRes.data.user.isAdmin)
           {
             document.getElementById("admin-dashboard").style.display = "inline";
           }
-          if(jsonRes.googleId) isFromGoogle = true;
-          document.getElementById("user-image").src = jsonRes.photoURL;
+          if(jsonRes.data.user.googleId) isFromGoogle = true;
+          document.getElementById("user-image").src = jsonRes.data.user.photoURL;
 
         }
         
     })
     .catch((err)=>{
       console.log(err);
-      // 
+      window.location.href = "/login.html";
     });
 
   // implementing logout API call
   logoutButton.addEventListener("click",(e)=>{
     myInit.method = "GET";
-    let url = "https://g24-cvmake-backend.herokuapp.com/api/" + (isFromGoogle ? "login/auth/google/" : "") + "logout";
+    let url = "/api/" + (isFromGoogle ? "login/auth/google/" : "") + "logout";
+    console.log(url);
     fetch(url,myInit)
     .then(res=>{
+      console.log(res.ok);
         if (!res.ok) {
-        throw Error("Could not fetch data for that resource");
+        window.location.href = "index.html";
+        // throw Error("Could not fetch data for that resource");
         } else {
             return res.json();
         }
     })
     .then((jsonRes)=>{
-        console.log({jsonRes});
-        localStorage.removeItem("token");
+        console.log(jsonRes);
+        if(localStorage.getItem("token")) localStorage.removeItem("token");
         window.location.href = "index.html";
     })
-    .catch((err)=>console.log(err));
+    .catch((err)=>
+    {
+      console.log(err)
+      // window.location.href = "index.html";
+
+    });
 
   });
 
