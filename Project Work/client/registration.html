@@ -216,6 +216,23 @@
         })
         .catch((error) => {
           console.error("Error:", error);
+          const alertDiv = document.getElementById("alert-message");
+          alertDiv.innerHTML = "";
+          alertDiv.style.display = "flex";
+          const newDiv = document.createElement("div");
+          newDiv.setAttribute("justify-content","center");
+          newDiv.setAttribute("align-items","center");
+          const str = "alert alert-danger alert-dismissible fade show container-md";
+          str.split(" ").forEach((c)=>newDiv.classList.add(c));
+          newDiv.innerHTML = error;
+
+          const newBtn = document.createElement("button");
+          newBtn.classList.add("btn-close");
+          newBtn.setAttribute("data-bs-dismiss","alert");
+          newBtn.setAttribute("aria-label","Close");
+
+          newDiv.append(newBtn);
+          alertDiv.append(newDiv);
         });
     });
   </script>
