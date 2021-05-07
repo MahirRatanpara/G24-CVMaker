@@ -8,6 +8,79 @@ Project: CVMaker
 Description:
 CV automation and resume parser CVMaker gives you the next level of resume management. It consists of CV templates which users can use to generate his/her CV. The tool also includes a parser that automatically parses the resume uploaded in some specified format, store the parse information and help to generate CV.
 
+## Demo
+
+Demo website: https://g24-cvmaker-prod.herokuapp.com
+
+## Run Locally
+      
+Make sure you have node.js and npm installed.
+
+Clone the project
+
+```bash
+  git clone https://github.com/MR-1301/G24-CVMaker.git
+```
+
+Go to the project directory
+
+Place .env file here(get the file from me)
+
+
+```bash
+  cd Project\ Work/
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run dev
+```
+
+Go to http://localhost:5000
+
+
+  
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`DBURI=#your DBURI here`
+
+`ACCESS_TOKEN_SECRET=#your access token secret here`
+
+`GOOGLE_CLIENT_ID=#your google clientId here`
+
+`GOOGLE_CLIENT_SECRET=#your google client secret here`
+
+`SECRET=#your session secret here`
+
+  
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+  
+## Tech Stack
+
+**Client:** HTML, CSS, Bootstrap(v4.6.x) vanilla-JS
+
+**Server:** Node, Express, MongoDB
+
+  
+## Contributing
+
+Contributions are always welcome!
+
+See `contributing.md` for ways to get started.
+
 
 ## Contributors ✨
 
