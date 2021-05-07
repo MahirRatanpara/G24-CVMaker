@@ -12,6 +12,29 @@
 //   $("#contact").attr("disabled", disableButton);
 // }
 
+const alertDivfun = (error)=>{
+  const alertDiv = document.getElementById("alert-message");
+  alertDiv.innerHTML = "";
+  alertDiv.style.display = "flex";
+  const newDiv = document.createElement("div");
+  newDiv.style.width = "fit-content";
+
+  // alertDiv.setAttribute("justify-content","center");
+  // alertDiv.setAttribute("align-items","center");
+  const str = "alert alert-warning alert-dismissible fade show container-md";
+  str.split(" ").forEach((c)=>newDiv.classList.add(c));
+    newDiv.innerHTML = error;
+
+  const newBtn = document.createElement("button");
+  newBtn.classList.add("btn-close");
+  newBtn.setAttribute("data-bs-dismiss","alert");
+  newBtn.setAttribute("aria-label","Close");
+
+
+  newDiv.append(newBtn);
+  alertDiv.append(newDiv);
+}
+
 const b = document.querySelector(".username button");
 const un = document.querySelector(".username");
 const que = document.querySelector(".que"); 
@@ -49,7 +72,7 @@ b.addEventListener("click", (e)=> {
 })
 .catch((error) => {
   console.error('Error:', error);
-  
+  alertDivfun(error);
 });
 });
 
@@ -78,7 +101,7 @@ que_b.addEventListener("click", ()=> {
 })
 .catch((error) => {
   console.error('Error:', error);
- 
+  alertDivfun(error);
 });
 
 });
@@ -118,7 +141,7 @@ function fun(e) {
   })
   .catch((error) => {
     console.error('Error:', error);
-    
+    alertDivfun(error);
   });
 
   }
