@@ -164,6 +164,29 @@
         .catch((error) => {
           console.error("Error:", error);
           // show errors to user
+          const alertDiv = document.getElementById("alert-message");
+          alertDiv.innerHTML = "";
+          alertDiv.style.display = "flex";
+          const newDiv = document.createElement("div");
+          alertDiv.setAttribute("justify-content","center");
+          alertDiv.setAttribute("align-items","center");
+          const str = "alert alert-danger alert-dismissible fade show container-md";
+          str.split(" ").forEach((c)=>newDiv.classList.add(c));
+          let errors = [];
+          if(Array.isArray(error)) errors.push(...error);
+          else errors.push(error);
+          errors.forEach((err)=>{
+            newDiv.innerHTML = err;
+          })
+
+          const newBtn = document.createElement("button");
+          newBtn.classList.add("btn-close");
+          newBtn.setAttribute("data-bs-dismiss","alert");
+          newBtn.setAttribute("aria-label","Close");
+        
+
+          newDiv.append(newBtn);
+          alertDiv.append(newDiv);
         });
     });
   </script>

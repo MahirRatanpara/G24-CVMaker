@@ -55,7 +55,7 @@
                   <a class="dropdown-item" href="#">Change Account</a>
                   <a class="dropdown-item" href="#">Change Password</a>
                   <a class="dropdown-item" href="profile.html">Edit Profile</a>
-                  <a class="dropdown-item" href="#" id="logout-button"
+                  <a class="dropdown-item" id="logout-button"
                     >Logout</a
                   >
                 </div>
@@ -849,7 +849,7 @@
       })
       .catch((err) => {
         console.log(err);
-        //
+        window.location.href = "login.html";
       });
 
     // implementing logout API call
