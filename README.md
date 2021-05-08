@@ -12,6 +12,8 @@ CV automation and resume parser CVMaker gives you the next level of resume manag
 
 Demo website: https://g24-cvmaker-prod.herokuapp.com
 
+Demo video: https://www.youtube.com/watch?v=yHjNK9YAMb8
+
 ## Run Locally
       
 Make sure you have node.js and npm installed.
